@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "dealx",
+    "slug": "dealx",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "dealx"
+}
