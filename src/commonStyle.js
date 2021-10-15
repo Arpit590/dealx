@@ -37,4 +37,6 @@ export const levels = {
     l3 : 12,
     l4 : 16,
     l5 : 24,
+    l6 : 28,
+    l7 : 32
 }
