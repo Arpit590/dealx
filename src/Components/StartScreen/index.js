@@ -8,42 +8,72 @@ export default class Index extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            screenCount : 0
+            screenCount : 0,
+            data : {
+                images : [
+                    require('../../assets/business-3d-0.png'),
+                    require('../../assets/business-3d-1.png'),
+                    require('../../assets/business-3d-2.png'),
+                    require('../../assets/business-3d-3.png'),
+                    require('../../assets/business-3d-4.png'),
+                    require('../../assets/business-3d-5.png')
+                ],
+                heading : [
+                    'Monetise Your Network',
+                    'Earn Upto 80% Success Fee',
+                    'Sell Whatever Buyer Needs',
+                    'Help Us Deal With Sellers',
+                    'Retain Your Referrals',
+                    'Safe, Secure, & Confidential'
+                ],
+                text : [
+                    'Refer Deals, Buyers or Sellers in your network. Earn assured success fee upon conversion of business. ',
+                    'Get upto 80% of success fee made in any transaction made from deal, buyer or seller referred by you.',
+                    'Get best quotations from verified sellers for anything that your network wants to buy. 100% assured by WorldRef.',
+                    'Help buyers source products and services from sellers in your network. You refer the sellers, or play a larger role, your choice!',
+                    'Deals, Buyers and Sellers first referred by you shall be exclusive. Continue earning referral fee from all the transactions. ',
+                    ''
+                ]
+            }
         }
     }
     render() {
         return (
             <LinearGradient colors={['#FFF4F5', '#F8F5F9', '#F0F6FF']} style={styles.linearGradient}>
-                <View style={{flex:.2,flexDirection:'row',alignItems:'center',justifyContent:'center'}}>
-                    <View style={{height:56,width:'100%',flexDirection:'row',alignItems:'center',justifyContent:'center'}}>
-                        <Image source={require('../../assets/logo.png')} style={{width:48,height:48}}/>
+                <View style={styles.view1}>
+                    <View style={styles.iconView}>
+                        <Image source={require('../../assets/logo.png')} style={styles.imgAttr}/>
                         <View style={{height:'100%',paddingLeft:levels.l2}}>
                             <Text style={styles.title}>worldref</Text>
-                            <Text style={{alignItems:'center',fontSize:fontSize.h7,marginTop:-4,textAlign:'center'}}>Globalisation, Simplified</Text>
+                            <Text style={styles.tagline}>Globalisation, Simplified</Text>
                         </View>
                     </View>
                 </View>
-                <View style={{flex:.5}}>
-                    <Image source={require('../../assets/business-3d-0.png')} style={{width:'80%',height:'70%'}} />
+                <View style={styles.view2}>
+                    <Image source={this.state.data.images[this.state.screenCount]} style={styles.imgPoster} key={this.state.data.heading[this.state.screenCount]} />
                 </View>
-                <View style={{flex:.3,alignItems:'center'}}>
-                    <Text style={styles.heading}>Monetise Your Network</Text>
-                    <Text style={{padding:levels.l5,textAlign:'center',lineHeight:20}}>Refer Deals, Buyers or Sellers in your network. Earn assured success fee upon conversion of business.</Text>
+                <View style={styles.view3}>
+                    <Text style={styles.heading}>{this.state.data.heading[this.state.screenCount]}</Text>
+                    <Text style={styles.txt}>{this.state.data.text[this.state.screenCount]}</Text>
                     <View style={{flexDirection:'row',alignItems:'center'}}>
-                        <View style={{flex:.25}}></View>
-                        <View style={{flex:.5,flexDirection:'row',justifyContent:'space-evenly'}}>
-                            {Array.from(Array(6).keys()).map((item,index) => {
-                                return (
-                                    <View style={[index === this.state.screenCount ? {backgroundColor:colors.textPrimary} : null,styles.dot]}>
-                                        {console.log(index)}
-                                    </View>
-                                )
-                            })}
-                            {/* <View style={[styles.dot]}>
-                            </View> */}
+                        <View style={{flex:.20}}></View>
+                        <View style={{flex:.6,alignItems:'center'}}>
+                            <View style={styles.dotView}>
+                                {Array.from(Array(6).keys()).map((item,index) => {
+                                    return (
+                                        <View key={this.state.data.heading[index]} style={[index === this.state.screenCount ? {backgroundColor:colors.textPrimary} : {backgroundColor : colors.textFaint},styles.dot]}>
+                                        </View>
+                                    )
+                                })}
+                            </View>
                         </View>
-                        <View style={{flex:.25}}>
-                            <TouchableOpacity style={styles.secondaryBtn}>
+                        <View style={{flex:.20}}>
+                            <TouchableOpacity style={styles.secondaryBtn} onPress={() => this.setState(prevState => {
+                                return{
+                                    ...prevState,
+                                    screenCount: prevState.screenCount+1
+                                }
+                            })}>
                                 <Text style={{color:colors.primary,textAlign:'center'}}>Next</Text>
                             </TouchableOpacity>
                         </View>
@@ -65,23 +95,69 @@ const styles = StyleSheet.create({
         fontSize   : 32,
         color      : colors.textPrimary,
         fontFamily : fontFamily.primaryBold,
-        fontWeight : 'bold'
     },
     heading        : {
-        fontSize   : fontSize.title,
-        fontWeight :'bold',
-        letterSpacing : 1
+        fontSize      : fontSize.title,
+        letterSpacing : 1,
+        fontFamily    : fontFamily.primaryBold
+    },
+    view1 :{
+        flex           :.2,
+        flexDirection  :'row',
+        alignItems     :'center',
+        justifyContent :'center'
+    },
+    iconView :{
+        height         :56,
+        width          :'100%',
+        flexDirection  :'row',
+        alignItems     :'center',
+        justifyContent :'center'
+    },
+    tagline : {
+        alignItems :'center',
+        fontSize   :fontSize.h7,
+        marginTop  :-4,
+        textAlign  :'center'
+    },
+    view2:{
+        flex           :.5,
+        alignItems     :'center',
+        justifyContent :'center'
+    },
+    imgAttr : {
+        width:48,
+        height:48
+    },
+    imgPoster:{
+        width:300,
+        height:276
+    },
+    view3 : {
+        flex:.3,
+        alignItems:'center',
+        justifyContent:'center'
+    },
+    txt : {
+        padding    :levels.l5,
+        textAlign  :'center',
+        lineHeight :20,
+        fontFamily : fontFamily.primaryRegular
     },
     secondaryBtn: {
         borderRadius : 5,
         borderColor  : colors.primary,
         borderWidth  : 1,
-        padding : 4
+        padding      : 4
+    },
+    dotView : {
+        width          :'80%',
+        flexDirection  :'row',
+        justifyContent :'space-evenly'
     },
     dot : {
-        height          : 12,
-        width           : 12,
-        borderRadius    : 6,
-        backgroundColor : colors.textFaint
+        height          : 10,
+        width           : 10,
+        borderRadius    : 5,
     }
-  });
+});
