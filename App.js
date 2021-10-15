@@ -3,7 +3,7 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import Index from './src/Components/StartScreen';
+import SplashScreens from './src/Components/StartScreen/SplashScreens';
 
 const Stack = createNativeStackNavigator();
 
@@ -13,7 +13,7 @@ export default function App() {
       <Stack.Navigator>
         <Stack.Screen 
           name="Splash" 
-          component={Index} 
+          component={SplashScreens} 
           options={{
             headerShown:false
           }}

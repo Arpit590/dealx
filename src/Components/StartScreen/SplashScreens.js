@@ -4,7 +4,7 @@ import LinearGradient from 'react-native-linear-gradient';
 
 import { colors, fontFamily, fontSize, levels } from '../../commonStyle';
 
-export default class Index extends Component {
+export default class SplashScreens extends Component {
     constructor(props) {
         super(props);
         this.state = {
