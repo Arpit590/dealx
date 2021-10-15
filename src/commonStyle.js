@@ -22,12 +22,12 @@ export const fontSize = {
 }
 
 export const fontFamily = {
-    primary        : 'Source Sans pro',
-    primaryBold    : 'Source Sans pro SemiBold',
-    primaryRegular : 'Source Sans pro Regular',
-    secondaryBold  : 'Gilroy SemiBold',
-    secondaryMd    : 'Gilroy Medium',
-    tertiary       : 'Poppins',
+    primary        : 'SourceSansPro-Light',
+    primaryBold    : 'SourceSansPro-SemiBold',
+    primaryRegular : 'SourceSansPro-Regular',
+    secondaryBold  : 'Gilroy-ExtraBold',
+    secondaryMd    : 'Gilroy-Light',
+    tertiary       : 'Poppins-Light',
 }
 
 // to be used with paddings and margins
