@@ -43,7 +43,12 @@ export default class Index extends Component {
                 <SafeAreaView style={{backgroundColor:'#FFF4F5',flex:0}}/>
                 <SafeAreaView style={{flex:1,backgroundColor:'#F0F6FF'}}>
                     <LinearGradient colors={['#FFF4F5', '#F8F5F9', '#F0F6FF']} style={styles.linearGradient}>
-                        <TouchableOpacity style={styles.skipBtn}>
+                        <TouchableOpacity style={styles.skipBtn} onPress={() => this.setState(prevState => {
+                            return{
+                                ...prevState,
+                                screenCount : 5
+                            }
+                        })}>
                             <Text style={{color:colors.primary,textDecorationLine:'underline'}}>Skip</Text>
                         </TouchableOpacity>
                         <View style={styles.view1}>
