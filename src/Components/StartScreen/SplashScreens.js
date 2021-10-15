@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { Image, Text, View, TouchableOpacity, StyleSheet, SafeAreaView } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
+import { Image, Text, View, TouchableOpacity, StyleSheet } from 'react-native';
 
+import {Index} from './Index'
 import { colors, fontFamily, fontSize, levels } from '../../commonStyle';
 
 export default class SplashScreens extends Component {
@@ -39,68 +39,63 @@ export default class SplashScreens extends Component {
     }
     render() {
         return (
-            <>
-                <SafeAreaView style={{backgroundColor:'#FFF4F5',flex:0}}/>
-                <SafeAreaView style={{flex:1,backgroundColor:'#F0F6FF'}}>
-                    <LinearGradient colors={['#FFF4F5', '#F8F5F9', '#F0F6FF']} style={styles.linearGradient}>
-                        <TouchableOpacity style={styles.skipBtn} onPress={() => this.setState(prevState => {
-                            return{
-                                ...prevState,
-                                screenCount : 5
-                            }
-                        })}>
-                            <Text style={{color:colors.primary,textDecorationLine:'underline'}}>Skip</Text>
-                        </TouchableOpacity>
-                        <View style={styles.view1}>
-                            <View style={styles.iconView}>
-                                <Image source={require('../../assets/logo.png')} style={styles.imgAttr}/>
-                                <View style={{height:'100%',paddingLeft:levels.l2}}>
-                                    <Text style={styles.title}>worldref</Text>
-                                    <Text style={styles.tagline}>Globalisation, Simplified</Text>
-                                </View>
+            <Index>
+                <TouchableOpacity style={styles.skipBtn} onPress={() => this.setState(prevState => {
+                    return{
+                        ...prevState,
+                        screenCount : 5
+                    }
+                })}>
+                    <Text style={{color:colors.primary,textDecorationLine:'underline'}}>Skip</Text>
+                </TouchableOpacity>
+                <View style={styles.view1}>
+                    <View style={styles.iconView}>
+                        <Image source={require('../../assets/logo.png')} style={styles.imgAttr}/>
+                        <View style={{height:'100%',paddingLeft:levels.l2}}>
+                            <Text style={styles.title}>worldref</Text>
+                            <Text style={styles.tagline}>Globalisation, Simplified</Text>
+                        </View>
+                    </View>
+                </View>
+                <View style={styles.view2}>
+                    <Image source={this.state.data.images[this.state.screenCount]} style={styles.imgPoster} key={this.state.data.heading[this.state.screenCount]} />
+                </View>
+                <View style={styles.view3}>
+                    <Text style={styles.heading}>{this.state.data.heading[this.state.screenCount]}</Text>
+                    {this.state.screenCount === 5 ? 
+                        <TouchableOpacity style={styles.primaryBtn}>
+                            <Text style={{color:'#ffffff'}}>Join Now</Text>
+                        </TouchableOpacity> 
+                    :
+                        <Text style={styles.txt}>{this.state.data.text[this.state.screenCount]}</Text> 
+                    }
+                    <View style={{flexDirection:'row',alignItems:'center'}}>
+                        <View style={{flex:.20}}></View>
+                        <View style={{flex:.6,alignItems:'center'}}>
+                            <View style={styles.dotView}>
+                                {Array.from(Array(6).keys()).map((item,index) => {
+                                    return (
+                                        <View key={this.state.data.heading[index]} style={[index === this.state.screenCount ? {backgroundColor:colors.textPrimary} : {backgroundColor : colors.textFaint},styles.dot]}>
+                                        </View>
+                                    )
+                                })}
                             </View>
                         </View>
-                        <View style={styles.view2}>
-                            <Image source={this.state.data.images[this.state.screenCount]} style={styles.imgPoster} key={this.state.data.heading[this.state.screenCount]} />
+                        <View style={{flex:.20}}>
+                            {this.state.screenCount !== 5 ?
+                                <TouchableOpacity style={styles.secondaryBtn} onPress={() => this.setState(prevState => {
+                                    return{
+                                        ...prevState,
+                                        screenCount: prevState.screenCount+1
+                                    }
+                                })}>
+                                    <Text style={{color:colors.primary,textAlign:'center'}}>Next</Text>
+                                </TouchableOpacity>
+                            : null}
                         </View>
-                        <View style={styles.view3}>
-                            <Text style={styles.heading}>{this.state.data.heading[this.state.screenCount]}</Text>
-                            {this.state.screenCount === 5 ? 
-                                <TouchableOpacity style={styles.primaryBtn}>
-                                    <Text style={{color:'#ffffff'}}>Join Now</Text>
-                                </TouchableOpacity> 
-                            :
-                                <Text style={styles.txt}>{this.state.data.text[this.state.screenCount]}</Text> 
-                            }
-                            <View style={{flexDirection:'row',alignItems:'center'}}>
-                                <View style={{flex:.20}}></View>
-                                <View style={{flex:.6,alignItems:'center'}}>
-                                    <View style={styles.dotView}>
-                                        {Array.from(Array(6).keys()).map((item,index) => {
-                                            return (
-                                                <View key={this.state.data.heading[index]} style={[index === this.state.screenCount ? {backgroundColor:colors.textPrimary} : {backgroundColor : colors.textFaint},styles.dot]}>
-                                                </View>
-                                            )
-                                        })}
-                                    </View>
-                                </View>
-                                <View style={{flex:.20}}>
-                                    {this.state.screenCount !== 5 ?
-                                        <TouchableOpacity style={styles.secondaryBtn} onPress={() => this.setState(prevState => {
-                                            return{
-                                                ...prevState,
-                                                screenCount: prevState.screenCount+1
-                                            }
-                                        })}>
-                                            <Text style={{color:colors.primary,textAlign:'center'}}>Next</Text>
-                                        </TouchableOpacity>
-                                    : null}
-                                </View>
-                            </View>
-                        </View>
-                    </LinearGradient>
-                </SafeAreaView>
-            </>
+                    </View>
+                </View>
+            </Index>
         )
     }
 }
@@ -112,11 +107,6 @@ const styles = StyleSheet.create({
         alignItems:'flex-end',
         justifyContent:'center',
         paddingRight:16
-    },
-    linearGradient: {
-      flex         : 1,
-      paddingLeft  : 16,
-      paddingRight : 16,
     },
     title: {
         fontSize   : 32,
