@@ -36,27 +36,21 @@ export default class SplashScreens extends Component {
                 ]
             }
         }
+        this._skip = this._skip.bind(this);
     }
+
+    _skip(){
+        this.setState(prevState => {
+            return{
+                ...prevState,
+                screenCount : 5
+            }
+        })
+    }
+
     render() {
         return (
-            <Index>
-                <TouchableOpacity style={styles.skipBtn} onPress={() => this.setState(prevState => {
-                    return{
-                        ...prevState,
-                        screenCount : 5
-                    }
-                })}>
-                    <Text style={{color:colors.primary,textDecorationLine:'underline'}}>Skip</Text>
-                </TouchableOpacity>
-                <View style={styles.view1}>
-                    <View style={styles.iconView}>
-                        <Image source={require('../../assets/logo.png')} style={styles.imgAttr}/>
-                        <View style={{height:'100%',paddingLeft:levels.l2}}>
-                            <Text style={styles.title}>worldref</Text>
-                            <Text style={styles.tagline}>Globalisation, Simplified</Text>
-                        </View>
-                    </View>
-                </View>
+            <Index screenName='splash' skip={this._skip}>
                 <View style={styles.view2}>
                     <Image source={this.state.data.images[this.state.screenCount]} style={styles.imgPoster} key={this.state.data.heading[this.state.screenCount]} />
                 </View>
@@ -102,49 +96,15 @@ export default class SplashScreens extends Component {
 
 
 const styles = StyleSheet.create({
-    skipBtn:{
-        flex:.05,
-        alignItems:'flex-end',
-        justifyContent:'center',
-        paddingRight:16
-    },
-    title: {
-        fontSize   : 32,
-        color      : colors.textPrimary,
-        fontFamily : fontFamily.primaryBold,
-    },
     heading        : {
         fontSize      : fontSize.title,
         letterSpacing : 1,
         fontFamily    : fontFamily.primaryBold
     },
-    view1 :{
-        flex           :.15,
-        flexDirection  :'row',
-        alignItems     :'center',
-        justifyContent :'center'
-    },
-    iconView :{
-        height         :56,
-        width          :'100%',
-        flexDirection  :'row',
-        alignItems     :'center',
-        justifyContent :'center'
-    },
-    tagline : {
-        alignItems :'center',
-        fontSize   :fontSize.h7,
-        marginTop  :-4,
-        textAlign  :'center'
-    },
     view2:{
         flex           :.45,
         alignItems     :'center',
         justifyContent :'center'
-    },
-    imgAttr : {
-        width:48,
-        height:48
     },
     imgPoster:{
         width:300,
