@@ -63,7 +63,7 @@ export default class SplashScreens extends Component {
                 <View style={styles.view3}>
                     <Text style={styles.heading}>{this.state.data.heading[this.state.screenCount]}</Text>
                     {this.state.screenCount === 5 ? 
-                        <TouchableOpacity style={styles.primaryBtn}>
+                        <TouchableOpacity style={styles.primaryBtn} onPress={() => this.props.navigation.navigate('Register')}>
                             <Text style={{color:'#ffffff'}}>Join Now</Text>
                         </TouchableOpacity> 
                     :
