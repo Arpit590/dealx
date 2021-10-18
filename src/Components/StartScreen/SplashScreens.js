@@ -36,10 +36,10 @@ export default class SplashScreens extends Component {
                 ]
             }
         }
-        this._skip = this._skip.bind(this);
+        this.skip = this.skip.bind(this);
     }
 
-    _skip(){
+    skip(){
         this.setState(prevState => {
             return{
                 ...prevState,
@@ -50,7 +50,7 @@ export default class SplashScreens extends Component {
 
     render() {
         return (
-            <Index screenName='splash' skip={this._skip}>
+            <Index screenName='splash' skip={this.skip} screenCount={this.state.screenCount}>
                 <View style={styles.view2}>
                     <Image source={this.state.data.images[this.state.screenCount]} style={styles.imgPoster} key={this.state.data.heading[this.state.screenCount]} />
                 </View>

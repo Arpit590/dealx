@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View} from 'react-native'
+import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View, Animated} from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 
 import { colors, fontFamily, fontSize, levels } from '../../commonStyle';
@@ -7,27 +7,53 @@ import { colors, fontFamily, fontSize, levels } from '../../commonStyle';
 export class Index extends Component {
     constructor(props){
         super(props);
+        this.state = {
+            translateAnim: new Animated.Value(0)
+        }
     }
+    componentDidMount(){
+        if(this.props.screenName === 'register'){
+            // animation for logo
+            Animated.timing(this.state.translateAnim, {
+                toValue: 100,
+                duration: 300,
+                useNativeDriver:true
+            }).start();
+        }
+    }
+
     render() {
+        const logoView = (
+            <View style={styles.iconView}>
+                <Image source={require('../../assets/logo.png')} style={styles.imgAttr}/>
+                <View style={{height:'100%',paddingLeft:levels.l2}}>
+                    <Text style={styles.title}>worldref</Text>
+                    <Text style={styles.tagline}>Globalisation, Simplified</Text>
+                </View>
+            </View>
+        )
         return (
             <>
                 <SafeAreaView style={{backgroundColor:'#FFF4F5',flex:0}}/>
                 <SafeAreaView style={{flex:1,backgroundColor:'#F0F6FF'}}>
                     <LinearGradient colors={['#FFF4F5', '#F8F5F9', '#F0F6FF']} style={styles.linearGradient}>
-                        {this.props.screenName === 'splash' ? 
+                        {this.props.screenName === 'splash' && this.props.screenCount !== 5 ? 
                         <TouchableOpacity style={styles.skipBtn} onPress={this.props.skip}>
                             <Text style={{color:colors.primary,textDecorationLine:'underline'}}>Skip</Text>
                         </TouchableOpacity>
                         : null }
-                        <View style={styles.view1}>
-                            <View style={styles.iconView}>
-                                <Image source={require('../../assets/logo.png')} style={styles.imgAttr}/>
-                                <View style={{height:'100%',paddingLeft:levels.l2}}>
-                                    <Text style={styles.title}>worldref</Text>
-                                    <Text style={styles.tagline}>Globalisation, Simplified</Text>
-                                </View>
+                        {this.props.screenName === 'register' ?
+                            <Animated.View style={[
+                                {transform:[{translateY:this.state.translateAnim}]},
+                                styles.view1
+                            ]}>
+                                {logoView}
+                            </Animated.View>
+                        :
+                            <View style={styles.view1}>
+                                {logoView}
                             </View>
-                        </View>
+                        }
                         {this.props.children}
                     </LinearGradient>
                 </SafeAreaView>
