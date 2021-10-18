@@ -27,7 +27,9 @@ export const fontFamily = {
     primaryRegular : 'SourceSansPro-Regular',
     secondaryBold  : 'Gilroy-ExtraBold',
     secondaryMd    : 'Gilroy-Light',
-    tertiary       : 'Poppins-Light',
+    tertiaryLt     : 'Poppins-Light',
+    tertiaryMd     : 'Poppins-Medium',
+    tertiarySemi   : 'Poppins-SemiBold',
 }
 
 // to be used with paddings and margins
