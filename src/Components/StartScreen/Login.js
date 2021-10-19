@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { connect } from 'react-redux';
 
-import { colors, fontFamily, fontSize, levels } from '../../commonStyle';
+import { colors, error, fontFamily, fontSize, levels } from '../../commonStyle';
 
 export class Login extends Component {
     constructor(props){
@@ -14,7 +14,8 @@ export class Login extends Component {
             invalidPassword : false,
             error : ''
         }
-        this.logging = this.logging.bind(this)
+        this.logging       = this.logging.bind(this)
+        this._onChangeText = this._onChangeText.bind(this)
     }
 
     logging(){
@@ -25,7 +26,7 @@ export class Login extends Component {
             this.setState(prevState => {
                 return{
                     ...prevState,
-                    error:'Email/Mobile Number Required',
+                    error:'Email Required',
                     invalidEmail : true
                 }
             })
@@ -34,7 +35,7 @@ export class Login extends Component {
             this.setState(prevState => {
                 return{
                     ...prevState,
-                    error:'Invalid email/mobile number',
+                    error:'Invalid email',
                     invalidEmail : true
                 }
             })
@@ -63,6 +64,18 @@ export class Login extends Component {
         }
     }
 
+    _onChangeText(val,type){
+        this.setState(prevState => {
+            return{
+                ...prevState,
+                [type]: val,
+                error:'',
+                invalidEmail : false,
+                invalidPassword : false,  
+            }
+        })
+    }
+
     render() {
         return (
             <View style={{width:'100%',marginTop:levels.l7}}>
@@ -70,22 +83,30 @@ export class Login extends Component {
                 <TextInput 
                     keyboardType="email-address"
                     placeholder="Enter email address"
+                    autoCapitalize="none"
+                    onChangeText={(val) => this._onChangeText(val,'email')}
                     style={[{marginBottom:levels.l4},styles.inputs]}
                 />
                 <Text style={styles.label}>Password</Text>
                 <TextInput
                     secureTextEntry={true}
                     placeholder="Enter password"
+                    onChangeText={(val) => this._onChangeText(val,'password')}
                     style={[{marginBottom:levels.l3},styles.inputs]}
                 />
                 <TouchableOpacity>
                     <Text style={styles.forgotTxt}>Forgot Password?</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.primaryBtn} onPress={() => this.props.navigation.navigate('Splash')}>
-                    <Text style={styles.btnTxt}>
-                        Log In
-                    </Text>
-                </TouchableOpacity>
+                <View>
+                    {this.state.error ? 
+                        <Text style={styles.error}>{this.state.error}</Text> 
+                    : null}
+                    <TouchableOpacity style={styles.primaryBtn} onPress={this.logging}>
+                        <Text style={styles.btnTxt}>
+                            Log In
+                        </Text>
+                    </TouchableOpacity>
+                </View>
                 <TouchableOpacity>
                     <Text style={styles.createAcc}>
                         New to WorldRef?
@@ -115,6 +136,14 @@ const styles = StyleSheet.create({
         fontFamily:fontFamily.tertiaryMd,
         fontSize : fontSize.h4
     },
+    error : {
+        fontSize:fontSize.h4,
+        color:colors.alert,
+        alignSelf:'center',
+        position:'absolute',
+        bottom:56,
+        fontFamily:fontFamily.tertiaryLt
+    },
     primaryBtn: {
         backgroundColor:colors.primary,
         borderRadius : 5,
@@ -123,7 +152,7 @@ const styles = StyleSheet.create({
         paddingLeft:levels.l7,
         paddingRight:levels.l7,
         alignSelf:'center',
-        marginTop : levels.l7,
+        marginTop : 48,
     },
     btnTxt : {
         color:colors.secondary,
