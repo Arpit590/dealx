@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Image, Text, View, TouchableOpacity, StyleSheet } from 'react-native';
+import { Image, Text, View, TouchableOpacity, StyleSheet, Animated } from 'react-native';
 
 import {Index} from './Index'
 import { colors, fontFamily, fontSize, levels } from '../../commonStyle';
@@ -34,9 +34,11 @@ export default class SplashScreens extends Component {
                     'Deals, Buyers and Sellers first referred by you shall be exclusive. Continue earning referral fee from all the transactions. ',
                     ''
                 ]
-            }
+            },
+            translateXAnim : new Animated.Value(0),
         }
-        this.skip = this.skip.bind(this);
+        this.skip     = this.skip.bind(this);
+        this.showNext = this.showNext.bind(this);
     }
 
     skip(){
@@ -48,12 +50,43 @@ export default class SplashScreens extends Component {
         })
     }
 
+    showNext(){
+        this.setState(prevState => {
+            return{
+                ...prevState,
+                screenCount: prevState.screenCount+1,
+                leftPos:-100
+            }
+        })
+        Animated.sequence([
+            Animated.timing(this.state.translateXAnim,{
+                toValue : -10,
+                duration:200,
+                useNativeDriver:true
+            }),
+            Animated.timing(this.state.translateXAnim,{
+                toValue : 0,
+                duration:200,
+                useNativeDriver:true
+            })
+        ]).start()
+    }
+
     render() {
         return (
-            <Index screenName='splash' skip={this.skip} screenCount={this.state.screenCount}>
-                <View style={styles.view2}>
+            <Index 
+                screenName='splash' 
+                skip={this.skip} 
+                screenCount={this.state.screenCount}
+            >
+                <Animated.View 
+                    style={[
+                        styles.view2,
+                        {transform:[{translateX:this.state.translateXAnim}]}
+                    ]}
+                >
                     <Image source={this.state.data.images[this.state.screenCount]} style={styles.imgPoster} key={this.state.data.heading[this.state.screenCount]} />
-                </View>
+                </Animated.View>
                 <View style={styles.view3}>
                     <Text style={styles.heading}>{this.state.data.heading[this.state.screenCount]}</Text>
                     {this.state.screenCount === 5 ? 
@@ -77,12 +110,7 @@ export default class SplashScreens extends Component {
                         </View>
                         <View style={{flex:.20}}>
                             {this.state.screenCount !== 5 ?
-                                <TouchableOpacity style={styles.secondaryBtn} onPress={() => this.setState(prevState => {
-                                    return{
-                                        ...prevState,
-                                        screenCount: prevState.screenCount+1
-                                    }
-                                })}>
+                                <TouchableOpacity style={styles.secondaryBtn} onPress={this.showNext}>
                                     <Text style={{color:colors.primary,textAlign:'center'}}>Next</Text>
                                 </TouchableOpacity>
                             : null}
