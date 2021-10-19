@@ -20,7 +20,7 @@ export class Register extends Component {
             <Index screenName="register">
                 <View style={styles.container}>
                     <Text style={styles.title}>Log In</Text>
-                    <Login />
+                    <Login navigation={this.props.navigation}/>
                 </View>
             </Index>
         )

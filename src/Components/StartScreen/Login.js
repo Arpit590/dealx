@@ -1,9 +1,68 @@
 import React, { Component } from 'react'
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { connect } from 'react-redux';
 
 import { colors, fontFamily, fontSize, levels } from '../../commonStyle';
 
 export class Login extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            email : '',
+            password : '',
+            invalidEmail : false,
+            invalidPassword : false,
+            error : ''
+        }
+        this.logging = this.logging.bind(this)
+    }
+
+    logging(){
+        //reset network failure state
+        this.props.onNetworkFailure();
+        
+        if(!this.state.email){
+            this.setState(prevState => {
+                return{
+                    ...prevState,
+                    error:'Email/Mobile Number Required',
+                    invalidEmail : true
+                }
+            })
+        }
+        else if(!/^\S+@\S+\.\S+$/i.test(this.state.email) || this.state.email.length > 255){
+            this.setState(prevState => {
+                return{
+                    ...prevState,
+                    error:'Invalid email/mobile number',
+                    invalidEmail : true
+                }
+            })
+        }
+        else if(!this.state.password){
+            this.setState(prevState => {
+                return{
+                    ...prevState,
+                    error:'Password Required',
+                    invalidPassword : true
+                }
+            })
+        }
+        else{
+
+            this.setState(prevState => {
+                return{
+                    ...prevState,
+                    loading : true,
+                    error:''
+                }
+            })
+
+            //calling API
+            // this.loginAPI(this.state.email,this.state.password)
+        }
+    }
+
     render() {
         return (
             <View style={{width:'100%',marginTop:levels.l7}}>
@@ -22,7 +81,7 @@ export class Login extends Component {
                 <TouchableOpacity>
                     <Text style={styles.forgotTxt}>Forgot Password?</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.primaryBtn}>
+                <TouchableOpacity style={styles.primaryBtn} onPress={() => this.props.navigation.navigate('Splash')}>
                     <Text style={styles.btnTxt}>
                         Log In
                     </Text>
@@ -47,7 +106,8 @@ const styles = StyleSheet.create({
         borderWidth : 1,
         borderRadius : 8,
         borderColor : colors.textFaint,
-        padding:levels.l3
+        padding:levels.l3,
+        fontFamily : fontFamily.tertiaryMd
     },
     forgotTxt : {
         color:colors.textLight,
@@ -79,4 +139,10 @@ const styles = StyleSheet.create({
     }
 })
 
-export default Login
+const mapDispatchToProps = dispatch => {
+    return {
+        onNetworkFailure : () => dispatch({type:'NETWORKFAILURE'}),
+    }
+}
+
+export default connect(null,mapDispatchToProps)(Login)
