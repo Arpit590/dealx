@@ -1,29 +1,41 @@
-import React, { useState } from 'react'
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { colors, fontSize } from '../../commonStyle'
-import TransactionOptions from './TransactionOptions'
-import TransactionTab from './TransactionTab'
+import React from 'react'
+import { StyleSheet, View } from 'react-native'
+import { colors, fontSize} from '../../../commonStyle'
+import TransactionHeader from '../TransactionHeader'
+import TransactionOptions from '../TransactionOptions'
+import TransactionTab from '../TransactionTab'
 
 const TransactionBuyingScreen = () => {
 
     return (
         <View style={styles.screen}>
             <View style={styles.container}>
-                <TransactionTab/>
+                <TransactionHeader/>
+                <TransactionTab
+                text1="My Earnings"
+                text2="Purchase Orders"
+                text3="Invoices"
+                />
                 <View style={styles.button}>
                     <TransactionOptions
+                    size={fontSize.h1}
+                    filterText="Buying"
                     text="Total Success Fee"
-                    price="150,000"
+                    price="100,000"
                     priceColor={colors.primary}
                     />
                     <TransactionOptions
+                    size={fontSize.h1}
+                    filterText="Buying"
                     text="Success Fee Paid"
-                    price="75,000"
+                    price="50,000"
                     priceColor="#27AE60"
                     />
                     <TransactionOptions
-                    text="Total Success Fee"
-                    price="150,000"
+                    size={fontSize.h1}
+                    filterText="Buying"
+                    text="Success Fee Not Paid"
+                    price="50,000"
                     priceColor="#F2994A"
                     />
                 </View>
@@ -39,9 +51,11 @@ const styles = StyleSheet.create({
         alignItems:"center",
         backgroundColor: colors.screen,
         flex:1,
+        width:"100%"
     },
     container:{
-        alignItems:"center"
+        alignItems:"center",
+        width:"100%"
     },
     button:{
         flex:1,
