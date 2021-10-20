@@ -7,6 +7,7 @@ import {createStore} from 'redux';
 
 import reducers from './src/Store/Reducers/index'
 import SplashScreens from './src/Components/StartScreen/SplashScreens';
+import TransactionBuyingScreen from './src/Components/StartScreen/TransactionBuyingScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -15,6 +16,13 @@ export default function App() {
     <Provider store={createStore(reducers)}>
       <NavigationContainer>
         <Stack.Navigator>
+          <Stack.Screen
+          name="TransactionBuying"
+          component={TransactionBuyingScreen}
+          options={{
+            headerShown:false
+          }}
+          />
           <Stack.Screen 
             name="Splash" 
             component={SplashScreens} 
