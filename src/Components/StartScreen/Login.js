@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { connect } from 'react-redux';
 
-import { colors, error, fontFamily, fontSize, levels } from '../../commonStyle';
+import { loginApi } from './api';
+import { colors, fontFamily, fontSize, levels } from '../../commonStyle';
 
 export class Login extends Component {
     constructor(props){
@@ -16,9 +17,13 @@ export class Login extends Component {
         }
         this.logging       = this.logging.bind(this)
         this._onChangeText = this._onChangeText.bind(this)
+        this.callbackLogin = this.callbackLogin.bind(this)
+
+        // api cancel tokens
+        this.loginToken;
     }
 
-    logging(){
+    async logging(){
         //reset network failure state
         this.props.onNetworkFailure();
         
@@ -60,7 +65,7 @@ export class Login extends Component {
             })
 
             //calling API
-            // this.loginAPI(this.state.email,this.state.password)
+            loginApi(this.state.email,this.state.password,this.loginToken,this.callbackLogin)
         }
     }
 
@@ -74,6 +79,10 @@ export class Login extends Component {
                 invalidPassword : false,  
             }
         })
+    }
+
+    callbackLogin(token){
+        console.log(token)
     }
 
     render() {
