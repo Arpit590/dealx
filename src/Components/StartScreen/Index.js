@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View, Animated} from 'react-native'
+import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View, Animated, ScrollView} from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 
 import { colors, fontFamily, fontSize, levels } from '../../commonStyle';
@@ -33,7 +33,7 @@ export class Index extends Component {
             </View>
         )
         return (
-            <>
+            <ScrollView contentContainerStyle={{flexGrow:1}}>
                 <SafeAreaView style={{backgroundColor:'#FFF4F5',flex:0}}/>
                 <SafeAreaView style={{flex:1,backgroundColor:'#F0F6FF'}}>
                     <LinearGradient colors={['#FFF4F5', '#F8F5F9', '#F0F6FF']} style={styles.linearGradient}>
@@ -57,7 +57,7 @@ export class Index extends Component {
                         {this.props.children}
                     </LinearGradient>
                 </SafeAreaView>
-            </>
+            </ScrollView>
         )
     }
 }
