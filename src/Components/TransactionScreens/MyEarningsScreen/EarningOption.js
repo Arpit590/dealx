@@ -1,16 +1,16 @@
 import React from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { colors, fontFamily } from '../../commonStyle'
+import { colors, fontFamily } from '../../../commonStyle'
 import {Entypo} from "react-native-vector-icons";
 import { useNavigation } from '@react-navigation/core';
 
 
-const TransactionOptions = ({text, price, priceColor, size, filterText}) => {
+const EarningOption = ({text, price, priceColor, size, heading}) => {
     
     const navigation = useNavigation();
 
     const navigationHandler=()=>{
-        navigation.navigate("MyEarnings", {filter: filterText, heading: text})
+        navigation.navigate("Electric", {heading: heading})
     }
 
     return (
@@ -33,7 +33,7 @@ const TransactionOptions = ({text, price, priceColor, size, filterText}) => {
     )
 }
 
-export default TransactionOptions
+export default EarningOption
 
 const styles = StyleSheet.create({
     container:{

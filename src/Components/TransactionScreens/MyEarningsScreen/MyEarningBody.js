@@ -3,7 +3,8 @@ import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import {AntDesign, FontAwesome} from "react-native-vector-icons";
 import {fontSize, fontFamily, colors} from "../../../commonStyle";
-import TransactionOptions from "../TransactionOptions";
+import EarningOption from './EarningOption';
+
 
 const MyEarningBody = () => {
 
@@ -37,33 +38,38 @@ const MyEarningBody = () => {
                 <View style={styles.options}>
                     {(route.params.heading === "Total Success Fee") &&
                     <>
-                        <TransactionOptions
+                        <EarningOption
                         text="Requirement of Electrical Spares"
                         price="25,000"
+                        heading= "Success Fee Paid"
                         priceColor="#219653"
                         size={fontSize.h5}
                         />
-                        <TransactionOptions
+                        <EarningOption
                         text="Electrical Spares"
                         price="10,000"
+                        heading= "Success Fee Paid"
                         priceColor="#219653"
                         size={fontSize.h5}
                         />
-                        <TransactionOptions
+                        <EarningOption
                         text="Electrical Spares"
                         price="15,000"
+                        heading= "Success Fee Paid"
                         priceColor="#F2994A"
                         size={fontSize.h5}
                         />
-                        <TransactionOptions
+                        <EarningOption
                         text="Electrical Spares"
                         price="35,000"
+                        heading= "Success Fee Paid"
                         priceColor="#F2994A"
                         size={fontSize.h5}
                         />
-                        <TransactionOptions
+                        <EarningOption
                         text="Electrical Spares"
                         price="15,000"
+                        heading= "Success Fee Paid"
                         priceColor="#219653"
                         size={fontSize.h5}
                         />
@@ -71,21 +77,24 @@ const MyEarningBody = () => {
                     }
                     {(route.params.heading === "Success Fee Paid") &&
                     <>
-                        <TransactionOptions
+                        <EarningOption
                         text="Requirement of Electrical Spares"
                         price="25,000"
+                        heading= "Success Fee Paid"
                         priceColor="#27AE60"
                         size={fontSize.h5}
                         />
-                        <TransactionOptions
+                        <EarningOption
                         text="Requirement of Electrical Spares"
                         price="10,000"
+                        heading= "Success Fee Paid"
                         priceColor="#27AE60"
                         size={fontSize.h5}
                         />
-                        <TransactionOptions
+                        <EarningOption
                         text="Requirement of Electrical Spares"
                         price="15,000"
+                        heading= "Success Fee Paid"
                         priceColor="#27AE60"
                         size={fontSize.h5}
                         />
@@ -93,21 +102,24 @@ const MyEarningBody = () => {
                     }
                     {(route.params.heading === "Success Fee Not Paid") &&
                     <>
-                        <TransactionOptions
+                        <EarningOption
                         text="Requirement of Electrical Spares"
                         price="25,000"
+                        heading= "Success Fee Not Paid"
                         priceColor="#F2994A"
                         size={fontSize.h5}
                         />
-                        <TransactionOptions
+                        <EarningOption
                         text="Requirement of Electrical Spares"
                         price="10,000"
+                        heading= "Success Fee Not Paid"
                         priceColor="#F2994A"
                         size={fontSize.h5}
                         />
-                        <TransactionOptions
+                        <EarningOption
                         text="Requirement of Electrical Spares"
                         price="15,000"
+                        heading= "Success Fee Not Paid"
                         priceColor="#F2994A"
                         size={fontSize.h5}
                         />

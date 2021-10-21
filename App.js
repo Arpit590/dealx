@@ -10,6 +10,7 @@ import SplashScreens from './src/Components/StartScreen/SplashScreens';
 import TransactionBuyingScreen from './src/Components/TransactionScreens/TransactionBuyingScreen/TransactionBuyingScreen';
 import TransactionSellingScreen from './src/Components/TransactionScreens/TransactionSellingScreen.js/TransactionSellingScreen';
 import MyEarningsScreen from './src/Components/TransactionScreens/MyEarningsScreen/MyEarningsScreen';
+import ElectricSpares from './src/Components/TransactionScreens/ElectricSparesScreen.js/ElectricSpares';
 
 const Stack = createNativeStackNavigator();
 
@@ -35,6 +36,13 @@ export default function App() {
           <Stack.Screen
           name="MyEarnings"
           component={MyEarningsScreen}
+          options={{
+            headerShown:false
+          }}
+          />
+          <Stack.Screen
+          name="Electric"
+          component={ElectricSpares}
           options={{
             headerShown:false
           }}
