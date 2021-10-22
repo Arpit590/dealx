@@ -61,12 +61,12 @@ export default class SplashScreens extends Component {
         Animated.sequence([
             Animated.timing(this.state.translateXAnim,{
                 toValue : -10,
-                duration:200,
+                duration:300,
                 useNativeDriver:true
             }),
             Animated.timing(this.state.translateXAnim,{
                 toValue : 0,
-                duration:200,
+                duration:300,
                 useNativeDriver:true
             })
         ]).start()
