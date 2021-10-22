@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import { Text, View, Animated, StyleSheet, TextInput } from 'react-native';
+import { Text, View, Animated, StyleSheet } from 'react-native';
 
-import { Index } from './Index'
+import Index  from './Index'
+import Inputs from './Inputs';
+
 import { fontFamily } from '../../commonStyle';
-import Login from './Login';
-
 
 export class Register extends Component {
     constructor(props){
@@ -13,15 +13,34 @@ export class Register extends Component {
             translateAnim: new Animated.Value(0),
             loginSection : true
         }
+
+        this.toggleSection = this.toggleSection.bind(this)
+    }
+
+    toggleSection(animationCallback){
+        this.setState(prevState => {
+            return{
+                ...prevState,
+                loginSection : !prevState.loginSection
+            }
+        })
+        animationCallback()
     }
 
     render() {
         return (
             <Index screenName="register">
                 <View style={styles.container}>
-                    <Text style={styles.title}>Log In</Text>
-                    <Login navigation={this.props.navigation}/>
+                    <Text style={styles.title}>{this.state.loginSection ?  'Log In' : 'Sign Up'}</Text>
+                    <Inputs 
+                    navigation={this.props.navigation} 
+                    loginSection={this.state.loginSection}
+                    toggleSection={this.toggleSection}
+                    />
                 </View>
+                {this.props.networkFailure ?
+                    <NetworkFailurePopup />
+                : null}
             </Index>
         )
     }
@@ -31,6 +50,7 @@ const styles = StyleSheet.create({
     container : {
         flex:1,
         marginTop:150,
+        marginBottom:150,
         alignItems:'center'
     },
     title : {

@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View, Animated, ScrollView} from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
+import { connect } from 'react-redux';
 
+import NetworkFailurePopup from '../Atoms/networkFailurePopup';
 import { colors, fontFamily, fontSize, levels } from '../../commonStyle';
 
-export class Index extends Component {
+class Index extends Component {
     constructor(props){
         super(props);
         this.state = {
@@ -56,6 +58,9 @@ export class Index extends Component {
                         }
                         {this.props.children}
                     </LinearGradient>
+                    {this.props.networkFailure ?
+                        <NetworkFailurePopup />
+                    : null}
                 </SafeAreaView>
             </ScrollView>
         )
@@ -103,3 +108,11 @@ const styles = StyleSheet.create({
         fontFamily : fontFamily.primaryBold,
     },
 })
+
+const mapStateToProps = state => {
+    return {
+        networkFailure : state.networkFailure.networkFailureState
+    }
+}
+
+export default connect(mapStateToProps,null)(Index)

@@ -11,6 +11,6 @@ export const loginApi = (email,password,cancelToken,callback) => {
         callback(response.data)
     })
     .catch(err => {
-        return 0
+        callback(-1)
     })
 }
