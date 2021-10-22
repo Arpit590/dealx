@@ -1,37 +1,63 @@
 import React, { Component } from 'react'
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { StyleSheet, Text, TextInput, TouchableOpacity, View, Animated } from 'react-native'
 import { connect } from 'react-redux';
 
 import { loginApi } from './api';
 import { colors, fontFamily, fontSize, levels } from '../../commonStyle';
 
-export class Login extends Component {
+export class Inputs extends Component {
     constructor(props){
         super(props);
         this.state = {
+            name:'',
             email : '',
             password : '',
+            password1 : '',
             invalidEmail : false,
             invalidPassword : false,
-            error : ''
+            error : '',
+            scaleAnim : new Animated.Value(0)
         }
-        this.logging       = this.logging.bind(this)
+        this.register      = this.register.bind(this)
         this._onChangeText = this._onChangeText.bind(this)
         this.callbackLogin = this.callbackLogin.bind(this)
+        this.scaleInputs   = this.scaleInputs.bind(this)
 
         // api cancel tokens
         this.loginToken;
     }
 
-    async logging(){
+    register(){
         //reset network failure state
         this.props.onNetworkFailure('reset');
-        
+
+        //validating inputs
+        //validation inputs on signup section
+        if(!this.props.loginSection){
+            if(!this.state.name){
+                this.setState(prevState => {
+                    return{
+                        ...prevState,
+                        error:'Name required',
+                    }
+                })
+                return;
+            }
+            if(!/^[A-Za-z]+$/.test(this.state.name) || this.state.name.length > 50){
+                this.setState(prevState => {
+                    return{
+                        ...prevState,
+                        error:'Invalid name.Only letters(A-z,a-z) are allowed.(Max. length=50 chars)',
+                    }
+                })
+                return;
+            }
+        }
         if(!this.state.email){
             this.setState(prevState => {
                 return{
                     ...prevState,
-                    error:'Email Required',
+                    error:'Email required',
                     invalidEmail : true
                 }
             })
@@ -49,13 +75,20 @@ export class Login extends Component {
             this.setState(prevState => {
                 return{
                     ...prevState,
-                    error:'Password Required',
+                    error:'Password required',
                     invalidPassword : true
                 }
             })
         }
+        else if(!this.props.loginSection && (this.state.password !== this.state.password1)){
+            this.setState(prevState => {
+                return{
+                    ...prevState,
+                    error:'Passwords do not match.',
+                }
+            })
+        }
         else{
-
             this.setState(prevState => {
                 return{
                     ...prevState,
@@ -63,7 +96,6 @@ export class Login extends Component {
                     error:''
                 }
             })
-
             //calling API
             loginApi(this.state.email,this.state.password,this.loginToken,this.callbackLogin)
         }
@@ -94,9 +126,37 @@ export class Login extends Component {
         }
     }
 
+    scaleInputs(){
+        this.setState(prevState => {
+            return{
+                ...prevState,
+                error : ''
+            }
+        })
+        Animated.timing(this.state.scaleAnim, {
+            toValue : 1 - (!this.props.loginSection ? 1 : 0),
+            duration : 400,
+            useNativeDriver : true
+        }).start()
+    }
+
     render() {
         return (
-            <View style={{width:'100%',marginTop:levels.l7}}>
+            <View style={{width:'100%',marginTop:levels.l7}}> 
+                    <Animated.View 
+                        style={{
+                            height:this.props.loginSection ? 0 : null,
+                            transform:[{scale:this.state.scaleAnim}]
+                        }}
+                    >
+                        <Text style={styles.label}>Name Address</Text>
+                        <TextInput 
+                            placeholder="Enter your name"
+                            autoCapitalize="none"
+                            onChangeText={(val) => this._onChangeText(val,'name')}
+                            style={[{marginBottom:levels.l4},styles.inputs]}
+                        />
+                    </Animated.View>
                 <Text style={styles.label}>Email Address</Text>
                 <TextInput 
                     keyboardType="email-address"
@@ -112,23 +172,49 @@ export class Login extends Component {
                     onChangeText={(val) => this._onChangeText(val,'password')}
                     style={[{marginBottom:levels.l3},styles.inputs]}
                 />
-                <TouchableOpacity>
-                    <Text style={styles.forgotTxt}>Forgot Password?</Text>
-                </TouchableOpacity>
+                    <Animated.View 
+                        style={{
+                            height:this.props.loginSection ? 0 : null,
+                            transform:[{scale:this.state.scaleAnim}],
+                        }}
+                    >
+                        <Text style={styles.label}>Confirm Password</Text>
+                        <TextInput 
+                            secureTextEntry={true}
+                            placeholder="Confirm your password"
+                            onChangeText={(val) => this._onChangeText(val,'password1')}
+                            style={[{marginBottom:levels.l4},styles.inputs]}
+                        />
+                    </Animated.View>
+                {this.props.loginSection ? 
+                    <TouchableOpacity>
+                        <Text style={styles.forgotTxt}>Forgot Password?</Text>
+                    </TouchableOpacity>
+                : 
+                    <View style={{flexDirection:'row'}}>
+                        <Text style={{fontFamily:fontFamily.primaryRegular,marginRight:levels.l1}}>
+                            I agree to the
+                        </Text> 
+                        <TouchableOpacity style={{alignItems:'center'}}>
+                            <Text style={{textDecorationLine:'underline',color:colors.primary}}>Terms and Conditions</Text>
+                        </TouchableOpacity>
+                    </View>
+                }
                 <View>
                     {this.state.error ? 
                         <Text style={styles.error}>{this.state.error}</Text> 
                     : null}
-                    <TouchableOpacity style={styles.primaryBtn} onPress={this.logging}>
+                    <TouchableOpacity style={styles.primaryBtn} onPress={this.register}>
                         <Text style={styles.btnTxt}>
-                            Log In
+                            {this.props.loginSection ? 'Log In' : 'Sign Up'}
                         </Text>
                     </TouchableOpacity>
                 </View>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => this.props.toggleSection(this.scaleInputs)}>
                     <Text style={styles.createAcc}>
-                        New to WorldRef?
-                        <Text style={{color:colors.primary}}> Create an account</Text>
+                        {this.props.loginSection ? 'New to WorldRef?' : 'Already have an account?'}
+                        <Text style={{color:colors.primary}}>
+                        {this.props.loginSection ? ' Create an account' : ' Login'}</Text>
                     </Text>
                 </TouchableOpacity>
             </View>
@@ -192,4 +278,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(null,mapDispatchToProps)(Login)
+export default connect(null,mapDispatchToProps)(Inputs)
