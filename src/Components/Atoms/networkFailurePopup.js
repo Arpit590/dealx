@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
-import { colors, levels } from '../../commonStyle'
+import { colors, fontFamily, levels } from '../../commonStyle'
 
 export default NetworkFailurePopup = () => {
     return (
@@ -23,7 +23,8 @@ const styles = StyleSheet.create({
         bottom:levels.l7,
         left:levels.l4,
         right:levels.l4,
-        zIndex:10
+        zIndex:10,
+        fontFamily:fontFamily.tertiaryMd
     },
     error : {
         color:colors.secondary,
