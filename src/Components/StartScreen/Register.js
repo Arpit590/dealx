@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import { Text, View, Animated, StyleSheet, TextInput } from 'react-native';
+import { Text, View, Animated, StyleSheet } from 'react-native';
 
-import { Index } from './Index'
-import { fontFamily } from '../../commonStyle';
+import Index  from './Index'
 import Login from './Login';
 
+import { fontFamily } from '../../commonStyle';
 
 export class Register extends Component {
     constructor(props){
@@ -22,6 +22,9 @@ export class Register extends Component {
                     <Text style={styles.title}>Log In</Text>
                     <Login navigation={this.props.navigation}/>
                 </View>
+                {this.props.networkFailure ?
+                    <NetworkFailurePopup />
+                : null}
             </Index>
         )
     }

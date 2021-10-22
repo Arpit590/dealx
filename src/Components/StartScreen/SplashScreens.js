@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Image, Text, View, TouchableOpacity, StyleSheet } from 'react-native';
 
-import {Index} from './Index'
+import Index from './Index'
 import { colors, fontFamily, fontSize, levels } from '../../commonStyle';
 
 export default class SplashScreens extends Component {

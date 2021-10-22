@@ -25,7 +25,7 @@ export class Login extends Component {
 
     async logging(){
         //reset network failure state
-        this.props.onNetworkFailure();
+        this.props.onNetworkFailure('reset');
         
         if(!this.state.email){
             this.setState(prevState => {
@@ -81,8 +81,17 @@ export class Login extends Component {
         })
     }
 
-    callbackLogin(token){
-        console.log(token)
+    callbackLogin(data){
+        if(data !== -1){
+            console.log(data)
+        }
+        else{
+            this.props.onNetworkFailure();
+            setTimeout(() => {
+                //reset network
+                this.props.onNetworkFailure('reset');
+            }, 3000);
+        }
     }
 
     render() {
@@ -179,7 +188,7 @@ const styles = StyleSheet.create({
 
 const mapDispatchToProps = dispatch => {
     return {
-        onNetworkFailure : () => dispatch({type:'NETWORKFAILURE'}),
+        onNetworkFailure : (reset) => dispatch({type:'NETWORKFAILURE',reset:reset}),
     }
 }
 
