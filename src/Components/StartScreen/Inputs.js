@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { StyleSheet, Text, TextInput, TouchableOpacity, View, Animated } from 'react-native'
 import { connect } from 'react-redux';
+import {Feather} from '@expo/vector-icons'
 
 import { loginApi } from './api';
 import { colors, fontFamily, fontSize, levels } from '../../commonStyle';
@@ -16,12 +17,14 @@ export class Inputs extends Component {
             invalidEmail : false,
             invalidPassword : false,
             error : '',
-            scaleAnim : new Animated.Value(0)
+            scaleAnim : new Animated.Value(0),
+            acceptedTerms : true
         }
         this.register      = this.register.bind(this)
         this._onChangeText = this._onChangeText.bind(this)
         this.callbackLogin = this.callbackLogin.bind(this)
         this.scaleInputs   = this.scaleInputs.bind(this)
+        this.acceptTerms   = this.acceptTerms.bind(this)
 
         // api cancel tokens
         this.loginToken;
@@ -88,6 +91,14 @@ export class Inputs extends Component {
                 }
             })
         }
+        else if(!this.props.loginSection && !this.state.acceptedTerms){
+            this.setState(prevState => {
+                return{
+                    ...prevState,
+                    error:'Please accept terms and conditions.',
+                }
+            })
+        }
         else{
             this.setState(prevState => {
                 return{
@@ -138,6 +149,15 @@ export class Inputs extends Component {
             duration : 400,
             useNativeDriver : true
         }).start()
+    }
+
+    acceptTerms(){
+        this.setState(prevState => {
+            return{
+                ...prevState,
+                acceptedTerms : !prevState.acceptedTerms
+            }
+        })
     }
 
     render() {
@@ -191,7 +211,16 @@ export class Inputs extends Component {
                         <Text style={styles.forgotTxt}>Forgot Password?</Text>
                     </TouchableOpacity>
                 : 
-                    <View style={{flexDirection:'row'}}>
+                    <View style={{flexDirection:'row',alignItems:'center'}}>
+                        <TouchableOpacity 
+                        onPress={this.acceptTerms}
+                        style={[
+                            styles.check,
+                            this.state.acceptedTerms ? {backgroundColor:colors.success,borderColor:colors.success} : {backgroundColor:colors.secondary,borderColor:colors.textLight}
+                        ]}
+                        >
+                            <Feather name="check" color='#ffffff' />
+                        </TouchableOpacity>
                         <Text style={{fontFamily:fontFamily.primaryRegular,marginRight:levels.l1}}>
                             I agree to the
                         </Text> 
@@ -247,6 +276,15 @@ const styles = StyleSheet.create({
         position:'absolute',
         bottom:56,
         fontFamily:fontFamily.tertiaryLt
+    },
+    check : {
+        height:16,
+        width:16,
+        borderWidth:1,
+        marginRight:levels.l3,
+        alignItems:'center',
+        justifyContent:'center',
+        borderRadius:2
     },
     primaryBtn: {
         backgroundColor:colors.primary,

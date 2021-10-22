@@ -50,6 +50,7 @@ const styles = StyleSheet.create({
     container : {
         flex:1,
         marginTop:150,
+        marginBottom:150,
         alignItems:'center'
     },
     title : {
