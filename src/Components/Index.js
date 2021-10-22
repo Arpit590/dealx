@@ -3,8 +3,8 @@ import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View, Animated
 import LinearGradient from 'react-native-linear-gradient'
 import { connect } from 'react-redux';
 
-import NetworkFailurePopup from '../Atoms/networkFailurePopup';
-import { colors, fontFamily, fontSize, levels } from '../../commonStyle';
+import NetworkFailurePopup from './Atoms/networkFailurePopup';
+import { colors, fontFamily, fontSize, levels } from '../commonStyle';
 
 class Index extends Component {
     constructor(props){

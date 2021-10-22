@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Text, View, Animated, StyleSheet } from 'react-native';
 
-import Index  from './Index'
+import Index  from '../Index'
 import Inputs from './Inputs';
 
 import { fontFamily } from '../../commonStyle';
