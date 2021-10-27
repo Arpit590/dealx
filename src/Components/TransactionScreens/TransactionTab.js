@@ -51,6 +51,7 @@ const TransactionTab = ({text1, text2, text3, Tab1, Tab2, Tab3}) => {
 
 export default TransactionTab
 
+
 const styles = StyleSheet.create({
     container:{
         flexDirection:"row",

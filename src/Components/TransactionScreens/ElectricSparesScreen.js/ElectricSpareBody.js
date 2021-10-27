@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { colors, fontFamily, fontSize } from '../../../commonStyle'
 
-const ElectricSpareBody = ({heading1, text1, heading2, text2, heading3, text3, heading4, text4, noButton}) => {
+const ElectricSpareBody = ({buttonTitle, heading1, text1, heading2, text2, heading3, text3, heading4, text4, noButton}) => {
     return (
         <View style={styles.container}>
             <View style={styles.view1}>
@@ -33,7 +33,7 @@ const ElectricSpareBody = ({heading1, text1, heading2, text2, heading3, text3, h
             </View>
             {!noButton &&
             <TouchableOpacity activeOpacity={0.8} style={styles.button}>
-                <Text style={{textAlign:"center", fontFamily: fontFamily.primaryRegular, color: colors.primary, fontSize: fontSize.h2}}>View Deal</Text>
+                <Text style={{textAlign:"center", fontFamily: fontFamily.primaryRegular, color: colors.primary, fontSize: fontSize.h2}}>{buttonTitle}</Text>
             </TouchableOpacity>
             }
         </View>

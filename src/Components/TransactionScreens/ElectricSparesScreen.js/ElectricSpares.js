@@ -4,6 +4,7 @@ import { StyleSheet, Text, TouchableOpacity, View, ScrollView } from 'react-nati
 import {colors, fontFamily, fontSize} from "../../../commonStyle";
 import {AntDesign} from "react-native-vector-icons";
 import ElectricSpareBody from './ElectricSpareBody';
+import PaymentOption from '../PaymentOption';
 
 const ElectricSpares = () => {
 
@@ -34,15 +35,18 @@ const ElectricSpares = () => {
                     heading3="Buying Name: "
                     text3 = "John Smith"
                     heading4="Deal Description: "
+                    buttonTitle="View Deal"
                     text4="Requirement of electrical spares in Surbaya for hydro power plant"
                     />
                     <ElectricSpareBody
                     heading1="Purchase Order Date: "
                     text1="12/07/2021"
+                    buttonTitle="View Purchase Order"
                     />
                     <ElectricSpareBody
                     heading1="Invoive Date: "
                     text1="12/07/2021"
+                    buttonTitle="View Invoice"
                     />
                     <ElectricSpareBody
                     heading1="Total Success Fee: "
@@ -53,6 +57,11 @@ const ElectricSpares = () => {
                     text3="$0"
                     noButton
                     />
+                    <View style={{backgroundColor:colors.secondary}}>
+                        <PaymentOption
+                        text={route.params.heading}
+                        />
+                    </View>
             </ScrollView>
         </View>
     )

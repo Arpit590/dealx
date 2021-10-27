@@ -1,17 +1,33 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { colors, fontFamily } from '../../commonStyle'
 import {Entypo} from "react-native-vector-icons";
 import { useNavigation } from '@react-navigation/core';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { addTransactionState } from '../../Store/actions';
 
 
 const TransactionOptions = ({text, price, priceColor, size, filterText}) => {
-    
+    const transactionState = useSelector((state)=>state.transaction.transaction)
     const navigation = useNavigation();
+    const dispatch = useDispatch();
+
 
     const navigationHandler=()=>{
-        navigation.navigate("MyEarnings", {filter: filterText, heading: text})
+        navigation.navigate("MyEarnings")
+        dispatch(addTransactionState(
+            {
+                text: text,
+                price: price,
+                priceColor: priceColor,
+                size: size,
+                filterText: filterText,
+            }
+        ))
     }
+
+    console.log(transactionState)
 
     return (
         <TouchableOpacity activeOpacity={0.8} style={styles.container}

@@ -2,19 +2,20 @@ import { useRoute } from '@react-navigation/core';
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import {AntDesign, FontAwesome} from "react-native-vector-icons";
+import { useSelector } from 'react-redux';
 import {fontSize, fontFamily, colors} from "../../../commonStyle";
 import EarningOption from './EarningOption';
 
 
 const MyEarningBody = () => {
 
-    const route = useRoute();
+    const [{text, filterText}] = useSelector((state)=>state.transaction.transaction);
 
     return (
         <View style={styles.view}>
             <View style={styles.view1}>
                 <View style={styles.filter}>
-                    <Text style={{fontSize:fontSize.h1, fontFamily: fontFamily.primary, color: "#FFFFFF", marginRight:15, fontWeight:"900"}}>{route.params.filter}</Text>
+                    <Text style={{fontSize:fontSize.h1, fontFamily: fontFamily.primary, color: "#FFFFFF", marginRight:15, fontWeight:"900"}}>{filterText}</Text>
                     <AntDesign
                     name="close"
                     size={15}
@@ -36,7 +37,7 @@ const MyEarningBody = () => {
                     <Text style={{fontWeight:"600", fontSize:fontSize.h4, color:colors.textPrimary}}>Amount</Text>
                 </View>
                 <View style={styles.options}>
-                    {(route.params.heading === "Total Success Fee") &&
+                    {(text === "Total Success Fee") &&
                     <>
                         <EarningOption
                         text="Requirement of Electrical Spares"
@@ -75,7 +76,7 @@ const MyEarningBody = () => {
                         />
                     </>
                     }
-                    {(route.params.heading === "Success Fee Paid") &&
+                    {(text === "Success Fee Paid") &&
                     <>
                         <EarningOption
                         text="Requirement of Electrical Spares"
@@ -100,7 +101,7 @@ const MyEarningBody = () => {
                         />
                     </>
                     }
-                    {(route.params.heading === "Success Fee Not Paid") &&
+                    {(text === "Success Fee Not Paid") &&
                     <>
                         <EarningOption
                         text="Requirement of Electrical Spares"

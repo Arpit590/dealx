@@ -3,11 +3,12 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { colors, fontFamily, fontSize } from '../../../commonStyle'
 import {AntDesign, MaterialIcons} from "react-native-vector-icons";
 import { useNavigation, useRoute } from '@react-navigation/core';
+import { useSelector } from 'react-redux';
 
 const MyEarningsHeader = () => {
 
+    const [{text}] = useSelector((state)=> state.transaction.transaction)
     const navigation = useNavigation();
-    const route = useRoute();
     
     return (
         <View style={styles.header}>
@@ -37,7 +38,7 @@ const MyEarningsHeader = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.view2}>
-                <Text style={styles.text}>{route.params.heading}</Text>
+                <Text style={styles.text}>{text}</Text>
                 <TouchableOpacity activeOpacity={0.8} style={styles.filter}>
                     <Image
                     source={require("../../../assets/filter.png")}

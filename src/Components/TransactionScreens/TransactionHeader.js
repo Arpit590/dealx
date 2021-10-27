@@ -27,7 +27,7 @@ const TransactionHeader = () => {
                         />
                         <Image
                         source={require("../../assets/dot.png")}
-                        style={{height:6, width:6, resizeMode:"contain", position:"absolute", right:0}}
+                        style={{height:8, width:8, resizeMode:"contain", position:"absolute", right:0}}
                         />
                     </View>
                 </TouchableOpacity>
