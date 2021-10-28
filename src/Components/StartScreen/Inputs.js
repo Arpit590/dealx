@@ -127,6 +127,7 @@ export class Inputs extends Component {
     callbackLogin(data){
         if(data !== -1){
             console.log(data)
+            this.props.navigation.navigate('New')
         }
         else{
             this.props.onNetworkFailure();

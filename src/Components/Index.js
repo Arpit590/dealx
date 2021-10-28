@@ -44,7 +44,7 @@ class Index extends Component {
                             <Text style={{color:colors.primary,textDecorationLine:'underline'}}>Skip</Text>
                         </TouchableOpacity>
                         : null }
-                        {this.props.screenName === 'register' ?
+                        {this.props.screenName ==='register' || this.props.screenName==='splash' ? this.props.screenName === 'register' ?
                             <Animated.View style={[
                                 {transform:[{translateY:this.state.translateAnim}]},
                                 styles.view1
@@ -55,7 +55,7 @@ class Index extends Component {
                             <View style={styles.view1}>
                                 {logoView}
                             </View>
-                        }
+                        : null}
                         {this.props.children}
                     </LinearGradient>
                     {this.props.networkFailure ?
