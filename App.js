@@ -8,6 +8,7 @@ import {createStore} from 'redux';
 import reducers from './src/Store/Reducers/index'
 import SplashScreens from './src/Components/StartScreen/SplashScreens';
 import Register from './src/Components/StartScreen/Register';
+import New from './src/Components/New/New';
 
 const Stack = createNativeStackNavigator();
 
@@ -29,6 +30,10 @@ export default function App() {
             options={{
               headerShown:false
             }}
+          />
+          <Stack.Screen 
+            name="New" 
+            component={New}
           />
         </Stack.Navigator>
       </NavigationContainer>
