@@ -79,41 +79,43 @@ export default class SplashScreens extends Component {
                 skip={this.skip} 
                 screenCount={this.state.screenCount}
             >
-                <Animated.View 
-                    style={[
-                        styles.view2,
-                        {transform:[{translateX:this.state.translateXAnim}]}
-                    ]}
-                >
-                    <Image source={this.state.data.images[this.state.screenCount]} style={styles.imgPoster} key={this.state.data.heading[this.state.screenCount]} />
-                </Animated.View>
-                <View style={styles.view3}>
-                    <Text style={styles.heading}>{this.state.data.heading[this.state.screenCount]}</Text>
-                    {this.state.screenCount === 5 ? 
-                        <TouchableOpacity style={styles.primaryBtn} onPress={() => this.props.navigation.navigate('Register')}>
-                            <Text style={{color:'#ffffff'}}>Join Now</Text>
-                        </TouchableOpacity> 
-                    :
-                        <Text style={styles.txt}>{this.state.data.text[this.state.screenCount]}</Text> 
-                    }
-                    <View style={{flexDirection:'row',alignItems:'center'}}>
-                        <View style={{flex:.20}}></View>
-                        <View style={{flex:.6,alignItems:'center'}}>
-                            <View style={styles.dotView}>
-                                {Array.from(Array(6).keys()).map((item,index) => {
-                                    return (
-                                        <View key={this.state.data.heading[index]} style={[index === this.state.screenCount ? {backgroundColor:colors.textPrimary} : {backgroundColor : colors.textFaint},styles.dot]}>
-                                        </View>
-                                    )
-                                })}
+                <View style={{paddingLeft:16,paddingRight:16,flex:1}}>
+                    <Animated.View 
+                        style={[
+                            styles.view2,
+                            {transform:[{translateX:this.state.translateXAnim}]}
+                        ]}
+                    >
+                        <Image source={this.state.data.images[this.state.screenCount]} style={styles.imgPoster} key={this.state.data.heading[this.state.screenCount]} />
+                    </Animated.View>
+                    <View style={styles.view3}>
+                        <Text style={styles.heading}>{this.state.data.heading[this.state.screenCount]}</Text>
+                        {this.state.screenCount === 5 ? 
+                            <TouchableOpacity style={styles.primaryBtn} onPress={() => this.props.navigation.navigate('Register')}>
+                                <Text style={{color:'#ffffff'}}>Join Now</Text>
+                            </TouchableOpacity> 
+                        :
+                            <Text style={styles.txt}>{this.state.data.text[this.state.screenCount]}</Text> 
+                        }
+                        <View style={{flexDirection:'row',alignItems:'center'}}>
+                            <View style={{flex:.20}}></View>
+                            <View style={{flex:.6,alignItems:'center'}}>
+                                <View style={styles.dotView}>
+                                    {Array.from(Array(6).keys()).map((item,index) => {
+                                        return (
+                                            <View key={this.state.data.heading[index]} style={[index === this.state.screenCount ? {backgroundColor:colors.textPrimary} : {backgroundColor : colors.textFaint},styles.dot]}>
+                                            </View>
+                                        )
+                                    })}
+                                </View>
                             </View>
-                        </View>
-                        <View style={{flex:.20}}>
-                            {this.state.screenCount !== 5 ?
-                                <TouchableOpacity style={styles.secondaryBtn} onPress={this.showNext}>
-                                    <Text style={{color:colors.primary,textAlign:'center'}}>Next</Text>
-                                </TouchableOpacity>
-                            : null}
+                            <View style={{flex:.20}}>
+                                {this.state.screenCount !== 5 ?
+                                    <TouchableOpacity style={styles.secondaryBtn} onPress={this.showNext}>
+                                        <Text style={{color:colors.primary,textAlign:'center'}}>Next</Text>
+                                    </TouchableOpacity>
+                                : null}
+                            </View>
                         </View>
                     </View>
                 </View>

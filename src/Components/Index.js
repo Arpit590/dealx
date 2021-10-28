@@ -69,9 +69,7 @@ class Index extends Component {
 
 const styles = StyleSheet.create({
     linearGradient: {
-        flex         : 1,
-        paddingLeft  : 16,
-        paddingRight : 16,
+        flex : 1,
     },
     skipBtn:{
         flex:.05,

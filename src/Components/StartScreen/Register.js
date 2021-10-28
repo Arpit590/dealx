@@ -51,6 +51,8 @@ const styles = StyleSheet.create({
         flex:1,
         marginTop:150,
         marginBottom:150,
+        paddingLeft:16,
+        paddingRight:16,
         alignItems:'center'
     },
     title : {
