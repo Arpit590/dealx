@@ -20,7 +20,25 @@ export default function App() {
   return (
     <Provider store={createStore(reducers)}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="TransactionBuying">
+        <Stack.Navigator>
+          <Stack.Screen 
+            name="Splash" 
+            component={SplashScreens} 
+            options={{
+              headerShown:false
+            }}
+          />
+          <Stack.Screen 
+            name="Register" 
+            component={Register} 
+            options={{
+              headerShown:false
+            }}
+          />
+          <Stack.Screen 
+            name="New" 
+            component={New}
+          />
         <Stack.Screen
           name="TransactionBuying"
           component={TransactionBuyingScreen}
@@ -55,24 +73,6 @@ export default function App() {
           options={{
             headerShown:false
           }}
-          />
-          <Stack.Screen 
-            name="Splash" 
-            component={SplashScreens} 
-            options={{
-              headerShown:false
-            }}
-          />
-          <Stack.Screen 
-            name="Register" 
-            component={Register} 
-            options={{
-              headerShown:false
-            }}
-          />
-          <Stack.Screen 
-            name="New" 
-            component={New}
           />
         </Stack.Navigator>
       </NavigationContainer>
