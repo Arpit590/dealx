@@ -22,4 +22,14 @@ const networkFailureReducer = (state=initialState,action) => {
     return state;
 }
 
+export const transactionState = (state={transaction: []}, action)=>{
+    switch(action.type){
+        case actionTypes.TRANSACTION_STATE:
+            return {transaction : [action.payload]}
+        default:
+            return state;
+    }
+}
+
+
 export default networkFailureReducer;

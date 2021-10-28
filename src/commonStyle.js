@@ -1,17 +1,20 @@
 export const colors = {
     primary      : '#0071DF',
     secondary    : '#FEFEFE',
+    screen       : '#E5E5E5',
     success      : '#2FAE60',
     alert        : '#EB5757',
     textPrimary  : '#000000',
     textLight    : '#717171',
     textFaint    : '#DADADA',
     textXLight   : '#F2F2F2',
-    primaryLight : '#D6EBFF'
+    primaryLight : '#D6EBFF',
+    borderColor  : '#DEDEDE',
 }
 
 export const fontSize = {
     title : 24,
+    text  : 20,
     h1    : 16,
     h2    : 15,
     h3    : 14,
