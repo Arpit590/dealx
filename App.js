@@ -1,4 +1,5 @@
 import React from 'react';
+import { SafeAreaView, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import {Provider} from 'react-redux'
@@ -13,6 +14,8 @@ import TransactionSellingScreen from './src/Components/TransactionScreens/Transa
 import MyEarningsScreen from './src/Components/TransactionScreens/MyEarningsScreen/MyEarningsScreen';
 import ElectricSpares from './src/Components/TransactionScreens/ElectricSparesScreen.js/ElectricSpares';
 import ClaimForm from './src/Components/TransactionScreens/ClaimForm';
+import TransactionHeader from './src/Components/TransactionScreens/TransactionHeader';
+import NewDeal from './src/Components/New/NewDeal';
 
 const Stack = createNativeStackNavigator();
 
@@ -38,8 +41,25 @@ export default function App() {
           <Stack.Screen 
             name="New" 
             component={New}
+            options={{
+              header:() => {
+                return (
+                  <SafeAreaView>
+                    <TransactionHeader headingText="What would you like to do?" />
+                  </SafeAreaView>
+                )
+              }
+            }}
           />
-        <Stack.Screen
+          <Stack.Screen
+            name="New Deal"
+            component={NewDeal}
+            options={{
+              title : '',
+              headerBackTitle:'New'
+            }}
+          />
+          <Stack.Screen
           name="TransactionBuying"
           component={TransactionBuyingScreen}
           options={{
