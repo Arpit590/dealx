@@ -1,36 +1,30 @@
 import React, { Component } from 'react'
-import { Modal, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import {MaterialCommunityIcons,AntDesign} from '@expo/vector-icons'
 
+import { ModalComp } from '../Atoms/Modal';
 import { colors, fontFamily, fontSize, levels } from '../../commonStyle';
 
-
 const SearchBuyer = props => (
-    <Modal transparent={true} visible={props.modalVisible} animationType="fade">
-        <TouchableOpacity 
-                onPressOut={props.close}
-                activeOpacity={1}
-                style={{flex:1,position:'absolute',backgroundColor:'rgba(0,0,0,0.4)',top:0,bottom:0,left:0,right:0}}
-        >
-            <View style={{flex:.7,backgroundColor:colors.secondary,margin:levels.l5,marginTop:64,padding:levels.l5,borderRadius:levels.l1}}>
-                <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center',marginBottom:levels.l4}}>
-                    <Text style={{fontFamily:fontFamily.primaryBold,fontSize:fontSize.h1}}>Search Buyer</Text>
-                    <AntDesign name="close" color={colors.textLight} onPress={props.close} size={24} />
-                </View>
-                <View style={{paddingLeft:levels.l5,justifyContent:'center',borderColor:colors.textFaint,borderWidth:1,marginBottom:levels.l3}}>
-                    <TextInput style={[styles.input,{borderColor:colors.secondary}]} placeholder="Search buyer" />
-                    <MaterialCommunityIcons name="magnify" size={22} color={colors.textLight} style={{position:'absolute',left:levels.l2}} />
-                </View>
-                <TouchableOpacity style={styles.add}> 
-                    <MaterialCommunityIcons name="plus" color={colors.primary} size={24} />
-                    <Text style={styles.addTxt}>Add New Buyer</Text> 
-                </TouchableOpacity>
-                <TouchableOpacity style={[styles.primaryBtn,{marginTop:'auto',alignSelf:'center'}]}>
-                    <Text style={{color:colors.secondary,fontFamily:fontFamily.primaryBold,fontSize:fontSize.h1}}>Add Buyer</Text>
-                </TouchableOpacity>
+    <ModalComp modalVisible={props.modalVisible}>
+        <View style={{flex:.7,backgroundColor:colors.secondary,margin:levels.l5,marginTop:64,padding:levels.l5,borderRadius:levels.l1}}>
+            <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center',marginBottom:levels.l4}}>
+                <Text style={{fontFamily:fontFamily.primaryBold,fontSize:fontSize.h1}}>Search Buyer</Text>
+                <AntDesign name="close" color={colors.textLight} onPress={props.close} size={24} />
             </View>
-        </TouchableOpacity>
-    </Modal>
+            <View style={{paddingLeft:levels.l5,justifyContent:'center',borderColor:colors.textFaint,borderWidth:1,marginBottom:levels.l3}}>
+                <TextInput style={[styles.input,{borderColor:colors.secondary}]} placeholder="Search buyer" />
+                <MaterialCommunityIcons name="magnify" size={22} color={colors.textLight} style={{position:'absolute',left:levels.l2}} />
+            </View>
+            <TouchableOpacity style={styles.add}> 
+                <MaterialCommunityIcons name="plus" color={colors.primary} size={24} />
+                <Text style={styles.addTxt}>Add New Buyer</Text> 
+            </TouchableOpacity>
+            <TouchableOpacity style={[styles.primaryBtn,{marginTop:'auto',alignSelf:'center'}]}>
+                <Text style={{color:colors.secondary,fontFamily:fontFamily.primaryBold,fontSize:fontSize.h1}}>Add Buyer</Text>
+            </TouchableOpacity>
+        </View>
+    </ModalComp>
 )
 
 export default class NewDeal extends Component {
@@ -64,7 +58,7 @@ export default class NewDeal extends Component {
                     </TouchableOpacity>
                     {this.state.inputItems.map((item,index) => {
                         return (
-                            <View style={{marginTop:levels.l2,marginBottom:levels.l2}}>
+                            <View style={{marginTop:levels.l2,marginBottom:levels.l2}} key={item}>
                                 <Text style={styles.text}>{item}</Text>
                                 <TextInput style={styles.input} />
                             </View>
