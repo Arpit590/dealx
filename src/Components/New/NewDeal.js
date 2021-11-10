@@ -4,7 +4,9 @@ import {MaterialCommunityIcons} from '@expo/vector-icons'
 
 import { ModalComp } from '../Atoms/Modal';
 import { ModalView } from './ModalView';
+
 import { colors, fontFamily, fontSize, levels } from '../../commonStyle';
+import { newStyle } from './newStyle';
 
 const SearchBuyer = props => (
     <ModalComp modalVisible={props.modalVisible}>
@@ -13,9 +15,9 @@ const SearchBuyer = props => (
                 <TextInput style={[styles.input,{borderColor:colors.secondary}]} placeholder="Search buyer" />
                 <MaterialCommunityIcons name="magnify" size={22} color={colors.textLight} style={{position:'absolute',left:levels.l2}} />
             </View>
-            <TouchableOpacity style={styles.add}> 
+            <TouchableOpacity style={newStyle.add}> 
                 <MaterialCommunityIcons name="plus" color={colors.primary} size={24} />
-                <Text style={styles.addTxt}>Add New Buyer</Text> 
+                <Text style={newStyle.addTxt}>Add New Buyer</Text> 
             </TouchableOpacity>
             <TouchableOpacity style={[styles.primaryBtn,{marginTop:'auto',alignSelf:'center'}]}>
                 <Text style={{color:colors.secondary,fontFamily:fontFamily.primaryBold,fontSize:fontSize.h1}}>Add Buyer</Text>
@@ -44,14 +46,14 @@ export default class NewDeal extends Component {
         return (
             <ScrollView style={{padding:levels.l5,backgroundColor:colors.secondary}}>
                 <SafeAreaView>
-                    <TouchableOpacity style={styles.add} onPress={() => this.setState(prevState => {
+                    <TouchableOpacity style={newStyle.add} onPress={() => this.setState(prevState => {
                         return{
                             ...prevState,
                             search : !prevState.search
                         }
                     })}> 
                         <MaterialCommunityIcons name="plus" color={colors.primary} size={24} />
-                        <Text style={styles.addTxt}>Add Buyer</Text> 
+                        <Text style={newStyle.addTxt}>Add Buyer</Text> 
                     </TouchableOpacity>
                     {this.state.inputItems.map((item,index) => {
                         return (
@@ -74,14 +76,14 @@ export default class NewDeal extends Component {
                     </View>
                     <View style={{marginTop:levels.l7}}>
                         <Text style={styles.text}>Line Items</Text>
-                        <TouchableOpacity style={styles.add}> 
-                            <Text style={styles.addTxt}>Add Line Items</Text> 
+                        <TouchableOpacity style={newStyle.add}> 
+                            <Text style={newStyle.addTxt}>Add Line Items</Text> 
                         </TouchableOpacity>
                     </View>
                     <View>
                         <Text style={styles.text}>Attachments</Text>
-                        <TouchableOpacity style={styles.add}> 
-                            <Text style={styles.addTxt}>Add Attachments</Text> 
+                        <TouchableOpacity style={newStyle.add}> 
+                            <Text style={newStyle.addTxt}>Add Attachments</Text> 
                         </TouchableOpacity>
                     </View>
                     <View style={{flexDirection:'row',alignItems:'center'}}>
@@ -108,21 +110,6 @@ export default class NewDeal extends Component {
 }
 
 const styles = StyleSheet.create({
-    add : {
-        borderColor:colors.primary,
-        padding:levels.l4,
-        flexDirection:'row',
-        borderWidth:1,
-        alignItems:'center',
-        justifyContent:'center',
-        marginBottom:levels.l6
-    },
-    addTxt : {
-        color:colors.primary,
-        fontSize:fontSize.h1,
-        paddingLeft:levels.l2,
-        fontFamily:fontFamily.primaryBold
-    },
     text : {
         fontFamily : fontFamily.primaryBold,
         fontSize:fontSize.h4,
