@@ -9,7 +9,7 @@ export const newStyle = StyleSheet.create({
         borderWidth:1,
         alignItems:'center',
         justifyContent:'center',
-        marginBottom:levels.l6
+        marginBottom: levels.l4
     },
     addTxt : {
         color:colors.primary,
@@ -17,4 +17,20 @@ export const newStyle = StyleSheet.create({
         paddingLeft:levels.l2,
         fontFamily:fontFamily.primaryBold
     },
+    text : {
+        fontFamily : fontFamily.primaryBold,
+        fontSize:fontSize.h4,
+        marginBottom:levels.l2
+    },
+    input : {
+        borderColor : colors.textFaint,
+        borderWidth:1,
+        padding:levels.l3,
+    },
+    primaryBtn : {
+        padding:levels.l4,
+        width:'50%',
+        alignItems:'center',
+        backgroundColor:colors.primary
+    }
 })

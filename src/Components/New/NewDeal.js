@@ -9,10 +9,23 @@ import { colors, fontFamily, fontSize, levels } from '../../commonStyle';
 import { newStyle } from './newStyle';
 import AddUserModal from './AddUserModal';
 
+export const ActionBtn = props => {
+    return(
+        <View style={{flexDirection:'row',alignItems:'center',marginTop:levels.l7}}>
+            <TouchableOpacity style={{width:'50%',alignItems:'center'}}>
+                <Text style={{color:colors.primary,fontFamily:fontFamily.primaryBold,fontSize:fontSize.h1}}>Cancel</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={newStyle.primaryBtn}>
+                <Text style={{color:colors.secondary,fontFamily:fontFamily.primaryBold,fontSize:fontSize.h1}}>Submit Deal</Text>
+            </TouchableOpacity>
+        </View>
+    )
+}
+
 const SearchBuyer = props => (
     <>
         <View style={{paddingLeft:levels.l5,justifyContent:'center',borderColor:colors.textFaint,borderWidth:1,marginBottom:levels.l3}}>
-            <TextInput style={[styles.input,{borderColor:colors.secondary}]} placeholder="Search buyer" />
+            <TextInput style={[newStyle.input,{borderColor:colors.secondary}]} placeholder="Search buyer" />
             <MaterialCommunityIcons name="magnify" size={22} color={colors.textLight} style={{position:'absolute',left:levels.l2}} />
         </View>
         <TouchableOpacity 
@@ -22,7 +35,7 @@ const SearchBuyer = props => (
             <MaterialCommunityIcons name="plus" color={colors.primary} size={24} />
             <Text style={newStyle.addTxt}>Add New Buyer</Text> 
         </TouchableOpacity>
-        <TouchableOpacity style={[styles.primaryBtn,{marginTop:'auto',alignSelf:'center'}]}>
+        <TouchableOpacity style={[newStyle.primaryBtn,{marginTop:'auto',alignSelf:'center'}]}>
             <Text style={{color:colors.secondary,fontFamily:fontFamily.primaryBold,fontSize:fontSize.h1}}>Add Buyer</Text>
         </TouchableOpacity>
     </>
@@ -43,7 +56,7 @@ export default class NewDeal extends Component {
             modalVisible : false,
             addNewUserModalVisible : false
         }
-        this.convertToAddNewUserModal = this.convertToAddNewUserModal.bind(this)
+        this.convertToAddNewUserModal = this.convertToAddNewUserModal.bind(this);
     }
 
     convertToAddNewUserModal(){
@@ -71,12 +84,12 @@ export default class NewDeal extends Component {
                     {this.state.inputItems.map((item,index) => {
                         return (
                             <View style={{marginTop:levels.l2,marginBottom:levels.l2}} key={item}>
-                                <Text style={styles.text}>{item}</Text>
-                                <TextInput style={styles.input} />
+                                <Text style={newStyle.text}>{item}</Text>
+                                <TextInput style={newStyle.input} />
                             </View>
                         )
                     })}
-                    <Text style={[styles.text,{marginTop:levels.l2}]}>Your Role in this Deal</Text>
+                    <Text style={[newStyle.text,{marginTop:levels.l2}]}>Your Role in this Deal</Text>
                     <View style={{flexDirection:'row'}}>
                         <View style={{flexDirection:'row',marginRight:levels.l7}}>
                             <View style={styles.role}></View>
@@ -88,25 +101,16 @@ export default class NewDeal extends Component {
                         </View>
                     </View>
                     <View style={{marginTop:levels.l7}}>
-                        <Text style={styles.text}>Line Items</Text>
                         <TouchableOpacity style={newStyle.add}> 
                             <Text style={newStyle.addTxt}>Add Line Items</Text> 
                         </TouchableOpacity>
                     </View>
                     <View>
-                        <Text style={styles.text}>Attachments</Text>
                         <TouchableOpacity style={newStyle.add}> 
                             <Text style={newStyle.addTxt}>Add Attachments</Text> 
                         </TouchableOpacity>
                     </View>
-                    <View style={{flexDirection:'row',alignItems:'center'}}>
-                        <TouchableOpacity style={{width:'50%',alignItems:'center'}}>
-                            <Text style={{color:colors.primary,fontFamily:fontFamily.primaryBold,fontSize:fontSize.h1}}>Cancel</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={styles.primaryBtn}>
-                            <Text style={{color:colors.secondary,fontFamily:fontFamily.primaryBold,fontSize:fontSize.h1}}>Submit Deal</Text>
-                        </TouchableOpacity>
-                    </View>
+                    <ActionBtn />
                     <ModalComp modalVisible={this.state.modalVisible}>
                         <ModalView topTxt={!this.state.addNewUserModalVisible ? "Search Buyer" : "Add New Buyer"} 
                             close={() => this.setState(prevState => {
@@ -123,7 +127,13 @@ export default class NewDeal extends Component {
                                 />
                             :
                                 <AddUserModal 
-                                    close={this.convertToAddNewUserModal}
+                                    navigation={this.props.navigation}
+                                    close={() => this.setState(prevState => {
+                                        return{
+                                            ...prevState,
+                                            modalVisible : !prevState.modalVisible
+                                        }
+                                    })}
                                 />
                             }
                         </ModalView>
@@ -140,11 +150,6 @@ const styles = StyleSheet.create({
         fontSize:fontSize.h4,
         marginBottom:levels.l2
     },
-    input : {
-        borderColor : colors.textFaint,
-        borderWidth:1,
-        padding:levels.l3,
-    },
     role : {
         height:16,
         width:16,
@@ -152,11 +157,5 @@ const styles = StyleSheet.create({
         borderColor:colors.textLight,
         borderWidth:1,
         marginRight:levels.l2
-    },
-    primaryBtn : {
-        padding:levels.l4,
-        width:'50%',
-        alignItems:'center',
-        backgroundColor:colors.primary
     }
 })

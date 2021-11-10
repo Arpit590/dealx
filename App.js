@@ -16,6 +16,7 @@ import ElectricSpares from './src/Components/TransactionScreens/ElectricSparesSc
 import ClaimForm from './src/Components/TransactionScreens/ClaimForm';
 import TransactionHeader from './src/Components/TransactionScreens/TransactionHeader';
 import NewDeal from './src/Components/New/NewDeal';
+import AddNewBuyer from './src/Components/New/AddNewBuyer';
 
 const Stack = createNativeStackNavigator();
 
@@ -57,6 +58,14 @@ export default function App() {
             options={{
               title : '',
               headerBackTitle:'New'
+            }}
+          />
+          <Stack.Screen
+            name="Add New Buyer"
+            component={AddNewBuyer}
+            options={{
+              title : '',
+              headerBackTitle:'Add New Buyer'
             }}
           />
           <Stack.Screen
