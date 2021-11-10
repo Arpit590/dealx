@@ -1,17 +1,14 @@
 import React, { Component } from 'react'
 import { SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import {MaterialCommunityIcons,AntDesign} from '@expo/vector-icons'
+import {MaterialCommunityIcons} from '@expo/vector-icons'
 
 import { ModalComp } from '../Atoms/Modal';
+import { ModalView } from './ModalView';
 import { colors, fontFamily, fontSize, levels } from '../../commonStyle';
 
 const SearchBuyer = props => (
     <ModalComp modalVisible={props.modalVisible}>
-        <View style={{flex:.7,backgroundColor:colors.secondary,margin:levels.l5,marginTop:64,padding:levels.l5,borderRadius:levels.l1}}>
-            <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center',marginBottom:levels.l4}}>
-                <Text style={{fontFamily:fontFamily.primaryBold,fontSize:fontSize.h1}}>Search Buyer</Text>
-                <AntDesign name="close" color={colors.textLight} onPress={props.close} size={24} />
-            </View>
+        <ModalView topTxt="Search Buyer" close={props.close}>
             <View style={{paddingLeft:levels.l5,justifyContent:'center',borderColor:colors.textFaint,borderWidth:1,marginBottom:levels.l3}}>
                 <TextInput style={[styles.input,{borderColor:colors.secondary}]} placeholder="Search buyer" />
                 <MaterialCommunityIcons name="magnify" size={22} color={colors.textLight} style={{position:'absolute',left:levels.l2}} />
@@ -23,7 +20,7 @@ const SearchBuyer = props => (
             <TouchableOpacity style={[styles.primaryBtn,{marginTop:'auto',alignSelf:'center'}]}>
                 <Text style={{color:colors.secondary,fontFamily:fontFamily.primaryBold,fontSize:fontSize.h1}}>Add Buyer</Text>
             </TouchableOpacity>
-        </View>
+        </ModalView>
     </ModalComp>
 )
 
