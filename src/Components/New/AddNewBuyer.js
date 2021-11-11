@@ -31,8 +31,8 @@ export default class AddNewBuyer extends Component {
                                 <Text style={newStyle.text}>{item}</Text>
                                 {index===1 ? 
                                     <>
-                                        <TextInput style={newStyle.input} placeholder="Address Line 1"/>
-                                        <TextInput style={newStyle.input} placeholder="Address Line 2"/>
+                                        <TextInput style={[newStyle.input,{marginBottom:levels.l2}]} placeholder="Address Line 1"/>
+                                        <TextInput style={[newStyle.input,{marginBottom:levels.l2}]} placeholder="Address Line 2"/>
                                         <TextInput style={newStyle.input} placeholder="Address Line 3"/>
                                     </>
                                 :
