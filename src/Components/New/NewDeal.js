@@ -11,7 +11,7 @@ import AddUserModal from './AddUserModal';
 
 export const ActionBtn = props => {
     return(
-        <View style={{flexDirection:'row',alignItems:'center',marginTop:levels.l7}}>
+        <View style={{flexDirection:'row',alignItems:'center',marginTop:levels.l7,paddingBottom:levels.l7}}>
             <TouchableOpacity style={{width:'50%',alignItems:'center'}}>
                 <Text style={{color:colors.primary,fontFamily:fontFamily.primaryBold,fontSize:fontSize.h1}}>Cancel</Text>
             </TouchableOpacity>
