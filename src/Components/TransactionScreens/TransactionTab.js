@@ -1,34 +1,30 @@
-import { useNavigation } from '@react-navigation/core'
 import React, { useState } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { colors, fontSize } from '../../commonStyle'
 
-const TransactionTab = ({text1, text2, text3, Tab1, Tab2, Tab3}) => {
+const TransactionTab = ({text1, text2, text3, toggleTab}) => {
     const [active1, setActive1] = useState(true);
     const [active2, setActive2] = useState(false);
     const [active3, setActive3] = useState(false);
-
-    const navigation = useNavigation();
 
     const activeButton1 = ()=>{
         setActive1(true);
         setActive2(false);
         setActive3(false);
-        navigation.navigate(Tab1)
+        toggleTab()
 
     }
     const activeButton2 = ()=>{
         setActive1(false);
         setActive2(true);
         setActive3(false);
-        navigation.navigate(Tab2)
+        toggleTab()
     }
     const activeButton3 = ()=>{
         setActive1(false);
         setActive2(false);
         setActive3(true);
-        navigation.navigate(Tab3)
     }
 
 
@@ -56,22 +52,22 @@ const styles = StyleSheet.create({
     container:{
         flexDirection:"row",
         alignItems:"center",
-        justifyContent:"center",
-        marginVertical:12,
     },
     activeOption:{
         paddingHorizontal:22,
         paddingVertical:10,
         backgroundColor:colors.primary,
         borderWidth:1,
-        borderColor:colors.primary
+        borderColor:colors.primary,
+        borderRadius:2
     },
     option:{
         paddingHorizontal:22,
         paddingVertical:10,
         backgroundColor:colors.secondary,
         borderWidth:1,
-        borderColor:colors.borderColor
+        borderColor:colors.borderColor,
+        borderRadius:2
     },
     activeText:{
         color:"#FEFEFE",

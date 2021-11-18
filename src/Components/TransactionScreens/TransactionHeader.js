@@ -2,7 +2,6 @@ import React from 'react'
 import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import {MaterialIcons, Feather} from "react-native-vector-icons";
 import { colors, fontFamily, fontSize } from '../../commonStyle';
-import TransactionTab from './TransactionTab';
 
 
 const TransactionHeader = props => {
@@ -11,12 +10,6 @@ const TransactionHeader = props => {
             <View style={styles.view}>
                 <View style={styles.view1}>
                     <Text style={{fontSize:fontSize.text, fontFamily:fontFamily.secondaryMd, color:colors.textPrimary, fontWeight:"bold"}}>{props.headingText}</Text>
-                    <TransactionTab
-                    text1="Buying"
-                    Tab1="TransactionBuying"
-                    text2="Selling"
-                    Tab2="TransactionSelling"
-                    />
                 </View>
                 <TouchableOpacity activeOpacity={0.8} style={styles.icon}>
                     <View>
