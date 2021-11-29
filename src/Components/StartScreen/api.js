@@ -11,7 +11,7 @@ export const loginApi = (email,password,cancelToken,callback) => {
         }
     })
     .then(response => {
-        callback({'success':JSON.stringify(response.data)})
+        callback({'success':response.data})
     })
     .catch(err => {
         err.response.status === 401 ? 

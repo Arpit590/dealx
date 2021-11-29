@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import { StyleSheet, Text, TextInput, TouchableOpacity, View, Animated } from 'react-native'
 import { connect } from 'react-redux';
 import {Feather} from '@expo/vector-icons'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import * as SecureStore from 'expo-secure-store';
+import axios from 'axios';
 
 import { loginApi, signUpApi } from './api';
 import { colors, fontFamily, fontSize, levels } from '../../commonStyle';
@@ -27,8 +30,7 @@ export class Inputs extends Component {
         this.acceptTerms      = this.acceptTerms.bind(this)
 
         // api cancel tokens
-        this.loginToken;
-        this.signUpToken;
+        this.cancelToken;
     }
 
     register(){
@@ -47,11 +49,11 @@ export class Inputs extends Component {
                 })
                 return;
             }
-            if(!/^[A-Za-z ]+$/.test(this.state.name) || this.state.name.length > 50){
+            if(!/^[A-Za-z ]+$/.test(this.state.name) || this.state.name.length > 50 || this.state.name.length < 3){
                 this.setState(prevState => {
                     return{
                         ...prevState,
-                        error:'Invalid name.Only letters(A-z,a-z) are allowed.(Max. length=50 chars)',
+                        error:'Invalid name.Only letters(A-z,a-z) are allowed.(Min. length=3 chars)',
                     }
                 })
                 return;
@@ -127,7 +129,7 @@ export class Inputs extends Component {
                 }
             })
             //calling API
-            this.props.loginSection ? loginApi(this.state.email,this.state.password,this.loginToken,this.callbackRegister) : signUpApi(this.state.email,this.state.name,this.state.password,this.signUpToken,this.callbackRegister) 
+            this.props.loginSection ? loginApi(this.state.email,this.state.password,this.cancelToken,this.callbackRegister) : signUpApi(this.state.email,this.state.name,this.state.password,this.cancelToken,this.callbackRegister) 
         }
     }
 
@@ -143,7 +145,7 @@ export class Inputs extends Component {
         })
     }
 
-    callbackRegister(data){
+    async callbackRegister(data){
         if(data.error){
             this.setState(prevState => {
                 return{
@@ -153,7 +155,14 @@ export class Inputs extends Component {
             })
         }
         else if(data.success){
-            console.log(data.success)
+            //saving confidential data into mobile secure database
+            await SecureStore.setItemAsync('token', data.success.tokenType + ' ' + data.success.accessToken);
+            await SecureStore.setItemAsync('username', data.success.userName);
+            await AsyncStorage.setItem('@fullName', data.success.fullName)
+
+            axios.defaults.headers.common['Authorization'] = data.success.tokenType + ' ' + data.success.accessToken;
+            this.props.onAuth(data.success.userName,data.success.fullName);
+            this.props.navigation.navigate('New')
         }
         else{
             this.props.onNetworkFailure()
@@ -339,6 +348,7 @@ const styles = StyleSheet.create({
 const mapDispatchToProps = dispatch => {
     return {
         onNetworkFailure : (reset) => dispatch({type:'NETWORKFAILURE',reset:reset}),
+        onAuth : (username,fullName) => dispatch({type:'LOGIN',username:username,fullName:fullName}),
     }
 }
 
