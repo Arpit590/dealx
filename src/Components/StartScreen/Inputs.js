@@ -3,7 +3,7 @@ import { StyleSheet, Text, TextInput, TouchableOpacity, View, Animated } from 'r
 import { connect } from 'react-redux';
 import {Feather} from '@expo/vector-icons'
 
-import { loginApi } from './api';
+import { loginApi, signUpApi } from './api';
 import { colors, fontFamily, fontSize, levels } from '../../commonStyle';
 
 export class Inputs extends Component {
@@ -18,16 +18,17 @@ export class Inputs extends Component {
             invalidPassword : false,
             error : '',
             scaleAnim : new Animated.Value(0),
-            acceptedTerms : true
+            acceptedTerms : false
         }
-        this.register      = this.register.bind(this)
-        this._onChangeText = this._onChangeText.bind(this)
-        this.callbackLogin = this.callbackLogin.bind(this)
-        this.scaleInputs   = this.scaleInputs.bind(this)
-        this.acceptTerms   = this.acceptTerms.bind(this)
+        this.register         = this.register.bind(this)
+        this._onChangeText    = this._onChangeText.bind(this)
+        this.callbackRegister = this.callbackRegister.bind(this)
+        this.scaleInputs      = this.scaleInputs.bind(this)
+        this.acceptTerms      = this.acceptTerms.bind(this)
 
         // api cancel tokens
         this.loginToken;
+        this.signUpToken;
     }
 
     register(){
@@ -46,11 +47,29 @@ export class Inputs extends Component {
                 })
                 return;
             }
-            if(!/^[A-Za-z]+$/.test(this.state.name) || this.state.name.length > 50){
+            if(!/^[A-Za-z ]+$/.test(this.state.name) || this.state.name.length > 50){
                 this.setState(prevState => {
                     return{
                         ...prevState,
                         error:'Invalid name.Only letters(A-z,a-z) are allowed.(Max. length=50 chars)',
+                    }
+                })
+                return;
+            }
+            if(this.state.password.length < 6){
+                this.setState(prevState => {
+                    return{
+                        ...prevState,
+                        error:'Password is too short(6 characters atleast)'
+                    }
+                })
+                return;
+            }
+            if(!this.state.acceptedTerms){
+                this.setState(prevState => {
+                    return{
+                        ...prevState,
+                        error:'Please accept Terms and Conditions'
                     }
                 })
                 return;
@@ -108,7 +127,7 @@ export class Inputs extends Component {
                 }
             })
             //calling API
-            loginApi(this.state.email,this.state.password,this.loginToken,this.callbackLogin)
+            this.props.loginSection ? loginApi(this.state.email,this.state.password,this.loginToken,this.callbackRegister) : signUpApi(this.state.email,this.state.name,this.state.password,this.signUpToken,this.callbackRegister) 
         }
     }
 
@@ -124,17 +143,23 @@ export class Inputs extends Component {
         })
     }
 
-    callbackLogin(data){
-        if(data !== -1){
-            console.log(data)
-            this.props.navigation.navigate('New')
+    callbackRegister(data){
+        if(data.error){
+            this.setState(prevState => {
+                return{
+                    ...prevState,
+                    error : data.error
+                }
+            })
+        }
+        else if(data.success){
+            console.log(data.success)
         }
         else{
-            this.props.onNetworkFailure();
+            this.props.onNetworkFailure()
             setTimeout(() => {
-                //reset network
-                this.props.onNetworkFailure('reset');
-            }, 3000);
+                this.props.onNetworkFailure('reset')
+            }, 2500);
         }
     }
 
@@ -170,7 +195,7 @@ export class Inputs extends Component {
                             transform:[{scale:this.state.scaleAnim}]
                         }}
                     >
-                        <Text style={styles.label}>Name Address</Text>
+                        <Text style={styles.label}>Name</Text>
                         <TextInput 
                             placeholder="Enter your name"
                             autoCapitalize="none"
