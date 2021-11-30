@@ -4,7 +4,11 @@ import {MaterialCommunityIcons} from '@expo/vector-icons'
 
 import Index from '../Index'
 import Navigation from '../Navigation/Navigation'
-import Briefcase from '../../../assets/icons/icons8-deals.svg'
+import ReferBuyer from '../../../assets/icons/icons8-ReferBuyer.svg'
+import ReferNewDeal from '../../../assets/icons/icons8-refer-new-deal.svg'
+import AddPurchase from '../../../assets/icons/icons8-add-purchase order.svg'
+import Quotation from '../../../assets/icons/icons8-quoation.svg'
+
 import { colors, fontFamily, fontSize, levels } from '../../commonStyle'
 import TransactionTab from '../TransactionScreens/TransactionTab'
 
@@ -15,6 +19,7 @@ export default class New extends Component {
         this.state = {
             buyingView : true
         }
+        this.iconSize = 28
     }
 
     render() {
@@ -38,19 +43,19 @@ export default class New extends Component {
                     {this.state.buyingView ?
                         <>
                             <TouchableOpacity style={styles.options} onPress={() => this.props.navigation.navigate('New Deal')}>
-                                <Briefcase height={28}/>
+                                <Quotation height={this.iconSize} />
                                 <Text style={styles.text}>
                                     New Quotation
                                 </Text>
                             </TouchableOpacity>
                             <TouchableOpacity style={styles.options}>
-                                <MaterialCommunityIcons name="account-plus-outline" size={32}/>
+                                <ReferBuyer height={this.iconSize} />
                                 <Text style={styles.text}>
                                     Refer Sellers
                                 </Text>
                             </TouchableOpacity>
                             <TouchableOpacity style={styles.options}>
-                                <MaterialCommunityIcons name="note-text-outline" size={32}/>
+                                <AddPurchase height={this.iconSize} />
                                 <Text style={styles.text}>
                                     Submit Invoices
                                 </Text>
@@ -59,19 +64,19 @@ export default class New extends Component {
                     :
                         <>
                             <TouchableOpacity style={styles.options} onPress={() => this.props.navigation.navigate('New Deal')}>
-                                <Briefcase height={28}/>
+                                <ReferNewDeal height={this.iconSize}/>
                                 <Text style={styles.text}>
                                     Refer New Deal
                                 </Text>
                             </TouchableOpacity>
                             <TouchableOpacity style={styles.options}>
-                                <MaterialCommunityIcons name="account-plus-outline" size={32}/>
+                                <ReferBuyer height={this.iconSize} />
                                 <Text style={styles.text}>
                                     Refer New Buyer
                                 </Text>
                             </TouchableOpacity>
                             <TouchableOpacity style={styles.options}>
-                                <MaterialCommunityIcons name="note-text-outline" size={32}/>
+                                <AddPurchase height={this.iconSize} />
                                 <Text style={styles.text}>
                                     Submit Purchase Order
                                 </Text>
