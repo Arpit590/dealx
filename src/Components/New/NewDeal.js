@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import { SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import {MaterialCommunityIcons} from '@expo/vector-icons'
+import { MaterialCommunityIcons } from '@expo/vector-icons'
 
 import { ModalComp } from '../Atoms/Modal';
 import { ModalView } from './ModalView';
+import AddUserModal from './AddUserModal';
 
 import { colors, fontFamily, fontSize, levels } from '../../commonStyle';
 import { newStyle } from './newStyle';
-import AddUserModal from './AddUserModal';
 
 export const ActionBtn = props => {
     return(
@@ -51,10 +51,11 @@ export default class NewDeal extends Component {
                 'Deal Closing Date',
                 'RFQ Type',
                 'Delivery Terms',
+                'Payment Terms',
                 'Deal Closure Date',
             ],
             modalVisible : false,
-            addNewUserModalVisible : false
+            addNewUserModalVisible : false,
         }
         this.convertToAddNewUserModal = this.convertToAddNewUserModal.bind(this);
     }
@@ -101,7 +102,7 @@ export default class NewDeal extends Component {
                         </View>
                     </View>
                     <View style={{marginTop:levels.l7}}>
-                        <TouchableOpacity style={newStyle.add}> 
+                        <TouchableOpacity style={newStyle.add} onPress={() => this.props.navigation.navigate('Line Items')}> 
                             <Text style={newStyle.addTxt}>Add Line Items</Text> 
                         </TouchableOpacity>
                     </View>
