@@ -3,6 +3,7 @@ import { SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 
 import AddUser from '../AddUser';
+import { AddBtn } from '../../Atoms/AddBtn';
 
 import { colors, fontFamily, fontSize, levels } from '../../../commonStyle';
 import { newStyle } from '../newStyle';
@@ -41,15 +42,12 @@ export default class NewDeal extends Component {
         return (
             <ScrollView style={{padding:levels.l5,backgroundColor:colors.secondary}}>
                 <SafeAreaView>
-                    <TouchableOpacity style={newStyle.add} onPress={() => this.setState(prevState => {
+                    <AddBtn text="Add Buyer" action={() => this.setState(prevState => {
                         return{
                             ...prevState,
                             modalVisible : !prevState.modalVisible,
                         }
-                    })}> 
-                        <MaterialCommunityIcons name="plus" color={colors.primary} size={24} />
-                        <Text style={newStyle.addTxt}>Add Buyer</Text> 
-                    </TouchableOpacity>
+                    })} />
                     {this.state.inputItems.map((item,index) => {
                         return (
                             <View style={{marginTop:levels.l2,marginBottom:levels.l2}} key={item}>
