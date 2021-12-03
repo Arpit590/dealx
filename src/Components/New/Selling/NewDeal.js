@@ -3,7 +3,7 @@ import { SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 
 import AddUser from '../AddUser';
-import { AddBtn } from '../../Atoms/AddBtn';
+import { AddBtn } from '../../Atoms/CompUtils';
 
 import { colors, fontFamily, fontSize, levels } from '../../../commonStyle';
 import { newStyle } from '../newStyle';
