@@ -16,6 +16,8 @@ export default class AddNewBuyer extends Component {
                 'Email ID',
                 'Phone Number',
                 'Company Name',
+                'Department',
+                'Designation',
                 'Company Profile',
                 'Company Website'
             ]
@@ -36,7 +38,7 @@ export default class AddNewBuyer extends Component {
                                         <TextInput style={newStyle.input} placeholder="Address Line 3"/>
                                     </>
                                 :
-                                    index === 5 ? 
+                                    index === 7 ? 
                                         <TouchableOpacity style={newStyle.add}> 
                                             <MaterialCommunityIcons name="plus" color={colors.primary} size={24} />
                                             <Text style={newStyle.addTxt}>Add Company Profile</Text> 
