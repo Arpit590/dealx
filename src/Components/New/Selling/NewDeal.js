@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import { SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import { MaterialCommunityIcons } from '@expo/vector-icons'
 
 import AddUser from '../AddUser';
-import { AddBtn } from '../../Atoms/CompUtils';
+import { AddBtn, PrimaryBtn } from '../../Atoms/CompUtils';
 
 import { colors, fontFamily, fontSize, levels } from '../../../commonStyle';
 import { newStyle } from '../newStyle';
@@ -14,9 +13,7 @@ export const ActionBtn = props => {
             <TouchableOpacity style={{width:'50%',alignItems:'center'}}>
                 <Text style={{color:colors.primary,fontFamily:fontFamily.primaryBold,fontSize:fontSize.h1}}>Cancel</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={newStyle.primaryBtn}>
-                <Text style={{color:colors.secondary,fontFamily:fontFamily.primaryBold,fontSize:fontSize.h1}}>Submit Deal</Text>
-            </TouchableOpacity>
+            <PrimaryBtn text="Submit Deal" />
         </View>
     )
 }

@@ -2,7 +2,9 @@ import React from 'react'
 import { View, Text, TextInput, TouchableOpacity, ScrollView } from 'react-native'
 import { AntDesign } from '@expo/vector-icons'
 
-import { colors, fontFamily, fontSize, levels } from '../../../commonStyle'
+import { PrimaryBtn } from '../../Atoms/CompUtils'
+
+import { colors, levels } from '../../../commonStyle'
 import { newStyle } from '../newStyle'
 
 const LineItems = (props) => {
@@ -34,9 +36,7 @@ const LineItems = (props) => {
                 </TouchableOpacity>
             </View>
             <TextInput style={[newStyle.input,{marginBottom:levels.l6}]} placeholder="Additional notes"/>
-            <TouchableOpacity style={[newStyle.primaryBtn,{alignSelf:'center'}]} onPress={() => props.navigation.goBack()}>
-                <Text style={{color:colors.secondary,fontFamily:fontFamily.primaryBold,fontSize:fontSize.h1}}>Add Item</Text>
-            </TouchableOpacity>
+            <PrimaryBtn text="Add Deal" />
         </ScrollView>
     )
 }
