@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import {MaterialCommunityIcons} from '@expo/vector-icons'
 
 import Index from '../Index'
 import Navigation from '../Navigation/Navigation'
+import AddUser from './AddUser'
 import ReferBuyer from '../../../assets/icons/icons8-ReferBuyer.svg'
 import ReferNewDeal from '../../../assets/icons/icons8-refer-new-deal.svg'
 import AddPurchase from '../../../assets/icons/icons8-add-purchase order.svg'
@@ -17,7 +17,8 @@ export default class New extends Component {
     constructor(props){
         super(props);
         this.state = {
-            buyingView : true
+            buyingView : true,
+            modalVisible : false,
         }
         this.iconSize = 28
     }
@@ -69,7 +70,14 @@ export default class New extends Component {
                                     Refer New Deal
                                 </Text>
                             </TouchableOpacity>
-                            <TouchableOpacity style={styles.options}>
+                            <TouchableOpacity 
+                            style={styles.options} 
+                            onPress={() => this.setState(prevState => {
+                                return{
+                                    ...prevState,
+                                    modalVisible : !prevState.modalVisible,
+                                }
+                            })}>
                                 <ReferBuyer height={this.iconSize} />
                                 <Text style={styles.text}>
                                     Refer New Buyer
@@ -84,6 +92,7 @@ export default class New extends Component {
                         </>
                     }
                 </View>
+                <AddUser navigation={this.props.navigation} modalVisible={this.state.modalVisible} />
                 <Navigation routeName={this.props.route.name} />
             </Index>
         )
