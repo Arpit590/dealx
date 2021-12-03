@@ -15,8 +15,9 @@ import MyEarningsScreen from './src/Components/TransactionScreens/MyEarningsScre
 import ElectricSpares from './src/Components/TransactionScreens/ElectricSparesScreen.js/ElectricSpares';
 import ClaimForm from './src/Components/TransactionScreens/ClaimForm';
 import TransactionHeader from './src/Components/TransactionScreens/TransactionHeader';
-import NewDeal from './src/Components/New/NewDeal';
-import AddNewBuyer from './src/Components/New/AddNewBuyer';
+import NewDeal from './src/Components/New/Selling/NewDeal';
+import AddNewBuyer from './src/Components/New/Selling/AddNewBuyer';
+import LineItems from './src/Components/New/Selling/LineItems';
 
 const Stack = createNativeStackNavigator();
 
@@ -57,7 +58,15 @@ export default function App() {
             component={NewDeal}
             options={{
               title : '',
-              headerBackTitle:'New'
+              headerBackTitle:'Refer Deal',
+            }}
+          />
+          <Stack.Screen
+            name="Line Items"
+            component={LineItems}
+            options={{
+              title : '',
+              headerBackTitle:'Add Line Items',
             }}
           />
           <Stack.Screen

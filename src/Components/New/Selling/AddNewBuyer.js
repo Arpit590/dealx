@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { SafeAreaView, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import {MaterialCommunityIcons} from '@expo/vector-icons'
 
-import { newStyle } from './newStyle';
-import { colors, fontFamily, fontSize, levels } from '../../commonStyle';
+import { newStyle } from '../newStyle';
+import { colors, fontFamily, fontSize, levels } from '../../../commonStyle';
 import { ActionBtn } from './NewDeal';
 
 export default class AddNewBuyer extends Component {

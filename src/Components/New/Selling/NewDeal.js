@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import { SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 
-import AddUser from './AddUser';
+import AddUser from '../AddUser';
 
-import { colors, fontFamily, fontSize, levels } from '../../commonStyle';
-import { newStyle } from './newStyle';
+import { colors, fontFamily, fontSize, levels } from '../../../commonStyle';
+import { newStyle } from '../newStyle';
 
 export const ActionBtn = props => {
     return(
