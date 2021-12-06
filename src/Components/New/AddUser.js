@@ -11,7 +11,7 @@ import { colors, fontFamily, fontSize, levels } from '../../commonStyle';
 const SearchBuyer = props => (
     <>
         <View style={{paddingLeft:levels.l5,justifyContent:'center',borderColor:colors.textFaint,borderWidth:1,marginBottom:levels.l3}}>
-            <TextInput style={[newStyle.input,{borderColor:colors.secondary}]} placeholder="Search buyer" />
+            <TextInput style={[newStyle.input,{borderColor:colors.secondary}]} placeholder={`Search ${props.type}`} />
             <MaterialCommunityIcons name="magnify" size={22} color={colors.textLight} style={{position:'absolute',left:levels.l2}} />
         </View>
         <TouchableOpacity 
@@ -19,10 +19,10 @@ const SearchBuyer = props => (
             style={newStyle.add}
         > 
             <MaterialCommunityIcons name="plus" color={colors.primary} size={24} />
-            <Text style={newStyle.addTxt}>Add New Buyer</Text> 
+            <Text style={newStyle.addTxt}>Add New {props.type}</Text> 
         </TouchableOpacity>
         <TouchableOpacity style={[newStyle.primaryBtn,{marginTop:'auto',alignSelf:'center'}]}>
-            <Text style={{color:colors.secondary,fontFamily:fontFamily.primaryBold,fontSize:fontSize.h1}}>Add Buyer</Text>
+            <Text style={{color:colors.secondary,fontFamily:fontFamily.primaryBold,fontSize:fontSize.h1}}>Add {props.type}</Text>
         </TouchableOpacity>
     </>
 )
@@ -84,7 +84,7 @@ export default class AddUser extends Component {
     render(){
         return(
             <ModalComp modalVisible={this.state.modalVisible}>
-                <ModalView topTxt={!this.state.addNewUserModalVisible ? "Search Buyer" : "Add New Buyer"} 
+                <ModalView topTxt={!this.state.addNewUserModalVisible && !this.props.noSearch ? `Search ${this.props.type}` : `Add New ${this.props.type}`} 
                     close={() => this.setState(prevState => {
                         return{
                             ...prevState,
@@ -93,9 +93,10 @@ export default class AddUser extends Component {
                         }
                     })}
                 >
-                    {!this.state.addNewUserModalVisible ? 
+                    {!this.state.addNewUserModalVisible && !this.props.noSearch ? 
                         <SearchBuyer 
                             convertToAddNewUserModal={this.convertToAddNewUserModal}
+                            type={this.props.type}
                         />
                     :
                         <AddUserModal 

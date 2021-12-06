@@ -75,7 +75,7 @@ export default class NewDeal extends Component {
                         </TouchableOpacity>
                     </View>
                     <ActionBtn />
-                    <AddUser navigation={this.props.navigation} modalVisible={this.state.modalVisible} />
+                    <AddUser navigation={this.props.navigation} modalVisible={this.state.modalVisible} type="Buyer" />
                 </SafeAreaView>
             </ScrollView>
         )

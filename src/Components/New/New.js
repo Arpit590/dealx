@@ -19,6 +19,7 @@ export default class New extends Component {
         this.state = {
             buyingView : true,
             modalVisible : false,
+            type : 'Seller'
         }
         this.iconSize = 28
     }
@@ -49,7 +50,13 @@ export default class New extends Component {
                                     New Quotation
                                 </Text>
                             </TouchableOpacity>
-                            <TouchableOpacity style={styles.options}>
+                            <TouchableOpacity style={styles.options} onPress={() => this.setState(prevState => {
+                                return{
+                                    ...prevState,
+                                    modalVisible : !prevState.modalVisible,
+                                    type: 'Sellers'
+                                }
+                            })}>
                                 <ReferBuyer height={this.iconSize} />
                                 <Text style={styles.text}>
                                     Refer Sellers
@@ -76,6 +83,7 @@ export default class New extends Component {
                                 return{
                                     ...prevState,
                                     modalVisible : !prevState.modalVisible,
+                                    type: 'Buyer'
                                 }
                             })}>
                                 <ReferBuyer height={this.iconSize} />
@@ -92,7 +100,7 @@ export default class New extends Component {
                         </>
                     }
                 </View>
-                <AddUser navigation={this.props.navigation} modalVisible={this.state.modalVisible} />
+                <AddUser navigation={this.props.navigation} modalVisible={this.state.modalVisible} type={this.state.type} noSearch={true} />
                 <Navigation routeName={this.props.route.name} />
             </Index>
         )
