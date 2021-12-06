@@ -44,7 +44,13 @@ export default class New extends Component {
                 <View style={{padding:levels.l4}}>
                     {this.state.buyingView ?
                         <>
-                            <TouchableOpacity style={styles.options} onPress={() => this.props.navigation.navigate('New Deal')}>
+                            <TouchableOpacity style={styles.options} onPress={() => this.setState(prevState => {
+                                return{
+                                    ...prevState,
+                                    modalVisible : !prevState.modalVisible,
+                                    type: 'Deals'
+                                }
+                            })}>
                                 <Quotation height={this.iconSize} />
                                 <Text style={styles.text}>
                                     New Quotation
@@ -100,7 +106,13 @@ export default class New extends Component {
                         </>
                     }
                 </View>
-                <AddUser navigation={this.props.navigation} modalVisible={this.state.modalVisible} type={this.state.type} noSearch={true} />
+                <AddUser 
+                navigation={this.props.navigation} 
+                modalVisible={this.state.modalVisible} 
+                type={this.state.type} 
+                noSearch={true} 
+                newQuotation="Choose Deal"    //for new quotaion option
+                />
                 <Navigation routeName={this.props.route.name} />
             </Index>
         )

@@ -14,6 +14,8 @@ const SearchBuyer = props => (
             <TextInput style={[newStyle.input,{borderColor:colors.secondary}]} placeholder={`Search ${props.type}`} />
             <MaterialCommunityIcons name="magnify" size={22} color={colors.textLight} style={{position:'absolute',left:levels.l2}} />
         </View>
+        {/* for new quotation screen */}
+        {!props.newQuotation ?
         <TouchableOpacity 
             onPress={props.convertToAddNewUserModal}
             style={newStyle.add}
@@ -21,8 +23,9 @@ const SearchBuyer = props => (
             <MaterialCommunityIcons name="plus" color={colors.primary} size={24} />
             <Text style={newStyle.addTxt}>Add New {props.type}</Text> 
         </TouchableOpacity>
+        : null }
         <TouchableOpacity style={[newStyle.primaryBtn,{marginTop:'auto',alignSelf:'center'}]}>
-            <Text style={{color:colors.secondary,fontFamily:fontFamily.primaryBold,fontSize:fontSize.h1}}>Add {props.type}</Text>
+            <Text style={{color:colors.secondary,fontFamily:fontFamily.primaryBold,fontSize:fontSize.h1}}>{props.newQuotation ? 'Submit Quotaion' : 'Add' + props.type}</Text>
         </TouchableOpacity>
     </>
 )
@@ -84,7 +87,7 @@ export default class AddUser extends Component {
     render(){
         return(
             <ModalComp modalVisible={this.state.modalVisible}>
-                <ModalView topTxt={!this.state.addNewUserModalVisible && !this.props.noSearch ? `Search ${this.props.type}` : `Add New ${this.props.type}`} 
+                <ModalView topTxt={this.props.newQuotation ? 'Choose Deal' : !this.state.addNewUserModalVisible && !this.props.noSearch ? `Search ${this.props.type}` : `Add New ${this.props.type}`} 
                     close={() => this.setState(prevState => {
                         return{
                             ...prevState,
@@ -93,10 +96,11 @@ export default class AddUser extends Component {
                         }
                     })}
                 >
-                    {!this.state.addNewUserModalVisible && !this.props.noSearch ? 
+                    {this.props.newQuotation || (!this.state.addNewUserModalVisible && !this.props.noSearch) ? 
                         <SearchBuyer 
                             convertToAddNewUserModal={this.convertToAddNewUserModal}
                             type={this.props.type}
+                            newQuotation={this.props.newQuotation}
                         />
                     :
                         <AddUserModal 
