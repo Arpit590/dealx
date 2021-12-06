@@ -18,6 +18,7 @@ import TransactionHeader from './src/Components/TransactionScreens/TransactionHe
 import NewDeal from './src/Components/New/Selling/NewDeal';
 import AddNewBuyer from './src/Components/New/Selling/AddNewBuyer';
 import LineItems from './src/Components/New/Selling/LineItems';
+import AddPurchaseOrder from './src/Components/New/Selling/AddPurchaseOrder';
 
 const Stack = createNativeStackNavigator();
 
@@ -53,6 +54,7 @@ export default function App() {
               }
             }}
           />
+          {/* selling screens */}
           <Stack.Screen
             name="New Deal"
             component={NewDeal}
@@ -75,6 +77,14 @@ export default function App() {
             options={{
               title : '',
               headerBackTitle:'Add New Buyer'
+            }}
+          />
+          <Stack.Screen
+            name="Add Purchase Order"
+            component={AddPurchaseOrder}
+            options={{
+              title : '',
+              headerBackTitle:'Add Purchase Order'
             }}
           />
           <Stack.Screen

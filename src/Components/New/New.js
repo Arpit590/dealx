@@ -83,7 +83,7 @@ export default class New extends Component {
                                     Refer New Buyer
                                 </Text>
                             </TouchableOpacity>
-                            <TouchableOpacity style={styles.options}>
+                            <TouchableOpacity style={styles.options} onPress={() => this.props.navigation.navigate('Add Purchase Order')}>
                                 <AddPurchase height={this.iconSize} />
                                 <Text style={styles.text}>
                                     Submit Purchase Order
