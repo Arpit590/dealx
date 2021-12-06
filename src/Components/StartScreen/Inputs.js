@@ -8,6 +8,7 @@ import axios from 'axios';
 
 import { loginApi, signUpApi } from './api';
 import { colors, fontFamily, fontSize, levels } from '../../commonStyle';
+import { SelectBox } from '../Atoms/CompUtils';
 
 export class Inputs extends Component {
     constructor(props){
@@ -247,15 +248,9 @@ export class Inputs extends Component {
                     </TouchableOpacity>
                 : 
                     <View style={{flexDirection:'row',alignItems:'center'}}>
-                        <TouchableOpacity 
-                        onPress={this.acceptTerms}
-                        style={[
-                            styles.check,
-                            this.state.acceptedTerms ? {backgroundColor:colors.success,borderColor:colors.success} : {backgroundColor:colors.secondary,borderColor:colors.textLight}
-                        ]}
-                        >
-                            <Feather name="check" color='#ffffff' />
-                        </TouchableOpacity>
+                        <SelectBox 
+                        onPress={this.acceptTerms} 
+                        acceptedTerms={this.state.acceptedTerms} />
                         <Text style={{fontFamily:fontFamily.primaryRegular,marginRight:levels.l1}}>
                             I agree to the
                         </Text> 
@@ -311,15 +306,6 @@ const styles = StyleSheet.create({
         position:'absolute',
         bottom:56,
         fontFamily:fontFamily.tertiaryLt
-    },
-    check : {
-        height:16,
-        width:16,
-        borderWidth:1,
-        marginRight:levels.l3,
-        alignItems:'center',
-        justifyContent:'center',
-        borderRadius:2
     },
     primaryBtn: {
         backgroundColor:colors.primary,
