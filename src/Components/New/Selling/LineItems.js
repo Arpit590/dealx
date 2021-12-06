@@ -36,7 +36,7 @@ const LineItems = (props) => {
                 </TouchableOpacity>
             </View>
             <TextInput style={[newStyle.input,{marginBottom:levels.l6}]} placeholder="Additional notes"/>
-            <PrimaryBtn text="Add Deal" />
+            <PrimaryBtn text="Add Line Items" />
         </ScrollView>
     )
 }

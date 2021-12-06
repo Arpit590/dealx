@@ -26,10 +26,10 @@ export const newStyle = StyleSheet.create({
         borderColor : colors.textFaint,
         borderWidth:1,
         padding:levels.l3,
+        fontFamily:fontFamily.primaryBold
     },
     primaryBtn : {
         padding:levels.l4,
-        width:'50%',
         alignItems:'center',
         backgroundColor:colors.primary
     }
