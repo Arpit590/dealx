@@ -16,7 +16,7 @@ import ElectricSpares from './src/Components/TransactionScreens/ElectricSparesSc
 import ClaimForm from './src/Components/TransactionScreens/ClaimForm';
 import TransactionHeader from './src/Components/TransactionScreens/TransactionHeader';
 import NewDeal from './src/Components/New/Selling/NewDeal';
-import AddNewBuyer from './src/Components/New/Selling/AddNewBuyer';
+import AddNewUser from './src/Components/New/AddNewUser';
 import LineItems from './src/Components/New/Selling/LineItems';
 import AddPurchaseOrder from './src/Components/New/Selling/AddPurchaseOrder';
 
@@ -72,11 +72,11 @@ export default function App() {
             }}
           />
           <Stack.Screen
-            name="Add New Buyer"
-            component={AddNewBuyer}
+            name="Add New User"
+            component={AddNewUser}
             options={{
               title : '',
-              headerBackTitle:'Add New Buyer'
+              headerBackTitle:'Add New'
             }}
           />
           <Stack.Screen

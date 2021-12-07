@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 
-import AddUser from '../AddUser';
+import AddUserModal from '../AddUserModal';
 import { AddBtn, PrimaryBtn } from '../../Atoms/CompUtils';
 
 import { colors, fontFamily, fontSize, levels } from '../../../commonStyle';
@@ -75,7 +75,7 @@ export default class NewDeal extends Component {
                         </TouchableOpacity>
                     </View>
                     <ActionBtn />
-                    <AddUser navigation={this.props.navigation} modalVisible={this.state.modalVisible} type="Buyer" />
+                    <AddUserModal navigation={this.props.navigation} modalVisible={this.state.modalVisible} type="Buyer" />
                 </SafeAreaView>
             </ScrollView>
         )

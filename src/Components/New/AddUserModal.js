@@ -38,10 +38,10 @@ const SearchBuyer = props => (
     </>
 )
 
-const AddUserModal = props => {
+const UserAddOptions = props => {
     const addManually = () => {
         props.close();
-        props.navigation.navigate('Add New Buyer') 
+        props.navigation.navigate('Add New User') 
     }
 
     return (
@@ -57,7 +57,7 @@ const AddUserModal = props => {
 }
 
 
-export default class AddUser extends Component {
+export default class AddUserModal extends Component {
     constructor(props){
         super(props);
         this.state = {
@@ -111,7 +111,7 @@ export default class AddUser extends Component {
                             newQuotation={this.props.newQuotation}
                         />
                     :
-                        <AddUserModal 
+                        <UserAddOptions 
                             navigation={this.props.navigation}
                             close={() => this.setState(prevState => {
                                 return{

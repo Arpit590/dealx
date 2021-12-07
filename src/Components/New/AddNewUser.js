@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 import { SafeAreaView, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import {MaterialCommunityIcons} from '@expo/vector-icons'
 
-import { newStyle } from '../newStyle';
-import { colors, fontFamily, fontSize, levels } from '../../../commonStyle';
-import { ActionBtn } from './NewDeal';
+import { newStyle } from './newStyle';
+import { colors, levels } from '../../commonStyle';
+import { ActionBtn } from './Selling/NewDeal';
 
-export default class AddNewBuyer extends Component {
+export default class AddNewUser extends Component {
     constructor(props){
         super(props)
         this.state = {
