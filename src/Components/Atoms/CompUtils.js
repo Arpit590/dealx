@@ -35,7 +35,6 @@ export const SelectBox = props => (
         props.acceptedTerms ? {backgroundColor:colors.success,borderColor:colors.success} : {backgroundColor:colors.secondary,borderColor:colors.textLight}
     ]}
     >
-        {console.log(props.acceptedTerms)}
         <Feather name="check" color='#ffffff' />
     </TouchableOpacity>
 )
