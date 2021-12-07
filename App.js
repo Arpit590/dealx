@@ -18,7 +18,7 @@ import TransactionHeader from './src/Components/TransactionScreens/TransactionHe
 import NewDeal from './src/Components/New/Selling/NewDeal';
 import AddNewUser from './src/Components/New/AddNewUser';
 import LineItems from './src/Components/New/Selling/LineItems';
-import AddPurchaseOrder from './src/Components/New/Selling/AddPurchaseOrder';
+import AddOrder from './src/Components/New/AddOrder';
 
 const Stack = createNativeStackNavigator();
 
@@ -76,15 +76,15 @@ export default function App() {
             component={AddNewUser}
             options={{
               title : '',
-              headerBackTitle:'Add New'
+              headerBackTitle:'Add New User'
             }}
           />
           <Stack.Screen
-            name="Add Purchase Order"
-            component={AddPurchaseOrder}
+            name="Add Order"
+            component={AddOrder}
             options={{
               title : '',
-              headerBackTitle:'Add Purchase Order'
+              headerBackTitle:'Add Order'
             }}
           />
           <Stack.Screen

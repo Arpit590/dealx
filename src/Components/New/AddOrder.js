@@ -1,19 +1,19 @@
 import React, { Component } from 'react'
 import { SafeAreaView, ScrollView, Text, TextInput, View } from 'react-native'
 
-import { AddBtn, PrimaryBtn } from '../../Atoms/CompUtils';
-import { newStyle } from '../newStyle';
-import { colors, levels } from '../../../commonStyle';
+import { AddBtn, PrimaryBtn } from '../Atoms/CompUtils';
+import { newStyle } from './newStyle';
+import { colors, levels } from '../../commonStyle';
 
-export default class AddPurchaseOrder extends Component {
+export default class AddOrder extends Component {
     constructor(props){
         super(props)
         this.state = {
             inputItems : [
                 'Select Deal',
                 'Select Seller',
-                'Purchase Order Amount',
-                'Purchase Order Number',
+                `${props.route.params.type} Amount`,
+                `${props.route.params.type} Number`,
             ]
         }
     }
@@ -32,8 +32,8 @@ export default class AddPurchaseOrder extends Component {
                         )
                     })}
                     <View style={{marginTop:levels.l7}}>
-                        <AddBtn text="Upload Purchase Order" />
-                        <PrimaryBtn text="Submit Purchase Order" />
+                        <AddBtn text={`Upload ${this.props.route.params.type}`} />
+                        <PrimaryBtn text={`Submit ${this.props.route.params.type}`} />
                     </View>
                 </SafeAreaView>
             </ScrollView>

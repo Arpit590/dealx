@@ -71,7 +71,10 @@ export default class New extends Component {
                                     Refer Sellers
                                 </Text>
                             </TouchableOpacity>
-                            <TouchableOpacity style={styles.options}>
+                            <TouchableOpacity 
+                            style={styles.options}
+                            onPress={() => this.props.navigation.navigate('Add Order',{type:'Invoice'})}
+                            >
                                 <AddPurchase height={this.iconSize} />
                                 <Text style={styles.text}>
                                     Submit Invoices
@@ -101,7 +104,10 @@ export default class New extends Component {
                                     Refer New Buyer
                                 </Text>
                             </TouchableOpacity>
-                            <TouchableOpacity style={styles.options} onPress={() => this.props.navigation.navigate('Add Purchase Order')}>
+                            <TouchableOpacity 
+                            style={styles.options} 
+                            onPress={() => this.props.navigation.navigate('Add Order',{type:'Purchase Order'})}
+                            >
                                 <AddPurchase height={this.iconSize} />
                                 <Text style={styles.text}>
                                     Submit Purchase Order
