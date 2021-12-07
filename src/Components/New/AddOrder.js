@@ -3,7 +3,7 @@ import { SafeAreaView, ScrollView, Text, TextInput, View } from 'react-native'
 
 import { AddBtn, PrimaryBtn } from '../Atoms/CompUtils';
 import { newStyle } from './newStyle';
-import { colors, levels } from '../../commonStyle';
+import { levels } from '../../commonStyle';
 
 export default class AddOrder extends Component {
     constructor(props){
@@ -19,7 +19,7 @@ export default class AddOrder extends Component {
     }
     render() {
         return(
-            <ScrollView style={{padding:levels.l5,backgroundColor:colors.secondary}}>
+            <ScrollView style={{padding:levels.l5}}>
                 <SafeAreaView>
                     {this.state.inputItems.map((item,index) => {
                         return(

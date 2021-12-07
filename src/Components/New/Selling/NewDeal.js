@@ -37,7 +37,7 @@ export default class NewDeal extends Component {
 
     render() {
         return (
-            <ScrollView style={{padding:levels.l5,backgroundColor:colors.secondary}}>
+            <ScrollView style={{padding:levels.l5}}>
                 <SafeAreaView>
                     <AddBtn text="Add Buyer" action={() => this.setState(prevState => {
                         return{
@@ -94,6 +94,7 @@ const styles = StyleSheet.create({
         borderRadius:8,
         borderColor:colors.textLight,
         borderWidth:1,
-        marginRight:levels.l2
+        marginRight:levels.l2,
+        backgroundColor:colors.secondary
     }
 })

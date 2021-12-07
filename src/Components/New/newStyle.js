@@ -10,7 +10,8 @@ export const newStyle = StyleSheet.create({
         alignItems:'center',
         justifyContent:'center',
         marginBottom: levels.l4,
-        marginTop:levels.l4
+        marginTop:levels.l4,
+        backgroundColor:colors.secondary
     },
     addTxt : {
         color:colors.primary,
@@ -27,7 +28,8 @@ export const newStyle = StyleSheet.create({
         borderColor : colors.textFaint,
         borderWidth:1,
         padding:levels.l3,
-        fontFamily:fontFamily.primaryBold
+        fontFamily:fontFamily.primaryBold,
+        backgroundColor:colors.secondary
     },
     primaryBtn : {
         padding:levels.l4,

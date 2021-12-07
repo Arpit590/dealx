@@ -25,7 +25,7 @@ export default class AddNewUser extends Component {
     }
     render() {
         return(
-            <ScrollView style={{padding:levels.l5,backgroundColor:colors.secondary}}>
+            <ScrollView style={{padding:levels.l5}}>
                 <SafeAreaView>
                     {this.state.inputItems.map((item,index) => {
                         return(
