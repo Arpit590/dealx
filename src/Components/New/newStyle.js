@@ -9,7 +9,8 @@ export const newStyle = StyleSheet.create({
         borderWidth:1,
         alignItems:'center',
         justifyContent:'center',
-        marginBottom: levels.l4
+        marginBottom: levels.l4,
+        marginTop:levels.l4
     },
     addTxt : {
         color:colors.primary,

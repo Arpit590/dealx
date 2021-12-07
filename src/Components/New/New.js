@@ -19,7 +19,8 @@ export default class New extends Component {
         this.state = {
             buyingView : true,
             modalVisible : false,
-            type : 'Seller'
+            type : 'Seller',
+            newQuotation: false
         }
         this.iconSize = 28
     }
@@ -48,7 +49,8 @@ export default class New extends Component {
                                 return{
                                     ...prevState,
                                     modalVisible : !prevState.modalVisible,
-                                    type: 'Deals'
+                                    type: 'Deals',
+                                    newQuotation : true,
                                 }
                             })}>
                                 <Quotation height={this.iconSize} />
@@ -60,7 +62,8 @@ export default class New extends Component {
                                 return{
                                     ...prevState,
                                     modalVisible : !prevState.modalVisible,
-                                    type: 'Sellers'
+                                    type: 'Sellers',
+                                    newQuotation : false,
                                 }
                             })}>
                                 <ReferBuyer height={this.iconSize} />
@@ -89,7 +92,8 @@ export default class New extends Component {
                                 return{
                                     ...prevState,
                                     modalVisible : !prevState.modalVisible,
-                                    type: 'Buyer'
+                                    type: 'Buyer',
+                                    newQuotation : false,
                                 }
                             })}>
                                 <ReferBuyer height={this.iconSize} />
@@ -110,8 +114,8 @@ export default class New extends Component {
                 navigation={this.props.navigation} 
                 modalVisible={this.state.modalVisible} 
                 type={this.state.type} 
-                noSearch={true} 
-                newQuotation="Choose Deal"    //for new quotaion option
+                noSearch={true}
+                newQuotation={this.state.newQuotation ? 'Choose Deals' : false}
                 />
                 <Navigation routeName={this.props.route.name} />
             </Index>

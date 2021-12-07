@@ -4,6 +4,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons'
 
 import { ModalComp } from '../Atoms/Modal';
 import { ModalView } from './ModalView';
+import { SelectBox } from '../Atoms/CompUtils';
 
 import { newStyle } from './newStyle';
 import { colors, fontFamily, fontSize, levels } from '../../commonStyle';
@@ -13,6 +14,13 @@ const SearchBuyer = props => (
         <View style={{paddingLeft:levels.l5,justifyContent:'center',borderColor:colors.textFaint,borderWidth:1,marginBottom:levels.l3}}>
             <TextInput style={[newStyle.input,{borderColor:colors.secondary}]} placeholder={`Search ${props.type}`} />
             <MaterialCommunityIcons name="magnify" size={22} color={colors.textLight} style={{position:'absolute',left:levels.l2}} />
+        </View>
+        <View>
+            <View style={[newStyle.input,{flexDirection:'row',justifyContent:'space-between'}]}>
+                <Text>Requirements</Text>
+                <SelectBox 
+                acceptedTerms={true}/>
+            </View>
         </View>
         {/* for new quotation screen */}
         {!props.newQuotation ?
@@ -25,7 +33,7 @@ const SearchBuyer = props => (
         </TouchableOpacity>
         : null }
         <TouchableOpacity style={[newStyle.primaryBtn,{marginTop:'auto',alignSelf:'center'}]}>
-            <Text style={{color:colors.secondary,fontFamily:fontFamily.primaryBold,fontSize:fontSize.h1}}>{props.newQuotation ? 'Submit Quotaion' : 'Add' + props.type}</Text>
+            <Text style={{color:colors.secondary,fontFamily:fontFamily.primaryBold,fontSize:fontSize.h1}}>{props.newQuotation ? 'Submit Quotaion' : 'Add ' + props.type}</Text>
         </TouchableOpacity>
     </>
 )
