@@ -32,19 +32,51 @@ export default class NewDeal extends Component {
                 'Deal Closure Date',
             ],
             modalVisible : false,
+            buyers : {}
         }
+
+        this.addBuyers = this.addBuyers.bind(this);
+    }
+
+    addBuyers(buyers){
+        this.setState(prevState => {
+            return{
+                ...prevState,
+                modalVisible : !prevState.modalVisible,
+                buyers : {
+                    ...prevState.buyers,
+                    ...buyers,
+                }
+            }
+        })
     }
 
     render() {
         return (
             <ScrollView style={{padding:levels.l5}}>
                 <SafeAreaView>
-                    <AddBtn text="Add Buyer" action={() => this.setState(prevState => {
-                        return{
-                            ...prevState,
-                            modalVisible : !prevState.modalVisible,
-                        }
-                    })} />
+                    {Object.keys(this.state.buyers).length > 0 ?        
+                        Object.keys(this.state.buyers).map((item,index) => {
+                            return(
+                                <View 
+                                style={{padding:levels.l3,backgroundColor:colors.secondary,flexDirection:'row'}}
+                                key={item}>
+                                    <Text style={[newStyle.text,{marginRight:levels.l6}]}>Buyer</Text>
+                                    <View>
+                                        <Text style={[newStyle.text,{fontSize:fontSize.h1}]}>{this.state.buyers[item]['buyername']}</Text>
+                                        <Text style={{fontFamily:fontFamily.primary,fontSize:fontSize.h3}}>Location</Text>
+                                    </View>
+                                </View>
+                            )
+                        })
+                    :
+                        <AddBtn text="Add Buyer" action={() => this.setState(prevState => {
+                            return{
+                                ...prevState,
+                                modalVisible : !prevState.modalVisible,
+                            }
+                        })} />
+                    }
                     {this.state.inputItems.map((item,index) => {
                         return (
                             <View style={{marginTop:levels.l2,marginBottom:levels.l2}} key={item}>
@@ -75,7 +107,11 @@ export default class NewDeal extends Component {
                         </TouchableOpacity>
                     </View>
                     <ActionBtn action="Submit Deal" />
-                    <AddUserModal navigation={this.props.navigation} modalVisible={this.state.modalVisible} type="Buyer" />
+                    <AddUserModal 
+                    navigation={this.props.navigation} 
+                    modalVisible={this.state.modalVisible} type="Buyer" 
+                    actionAfterSearchAndSelect={(buyers) => this.addBuyers(buyers)}
+                    />
                 </SafeAreaView>
             </ScrollView>
         )
