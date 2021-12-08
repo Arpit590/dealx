@@ -49,7 +49,7 @@ export default class AddNewUser extends Component {
                             </View>
                         )
                     })}
-                    <ActionBtn/>
+                    <ActionBtn action="Save"/>
                 </SafeAreaView>
             </ScrollView>
         )

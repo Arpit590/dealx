@@ -13,7 +13,7 @@ export const ActionBtn = props => {
             <TouchableOpacity style={{width:'50%',alignItems:'center'}}>
                 <Text style={{color:colors.primary,fontFamily:fontFamily.primaryBold,fontSize:fontSize.h1}}>Cancel</Text>
             </TouchableOpacity>
-            <PrimaryBtn text="Submit Deal" />
+            <PrimaryBtn text={props.action} />
         </View>
     )
 }
@@ -74,7 +74,7 @@ export default class NewDeal extends Component {
                             <Text style={newStyle.addTxt}>Add Attachments</Text> 
                         </TouchableOpacity>
                     </View>
-                    <ActionBtn />
+                    <ActionBtn action="Submit Deal" />
                     <AddUserModal navigation={this.props.navigation} modalVisible={this.state.modalVisible} type="Buyer" />
                 </SafeAreaView>
             </ScrollView>
