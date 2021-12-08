@@ -1,42 +1,15 @@
 import React, { Component } from 'react'
-import { Text, TextInput, TouchableOpacity, View } from 'react-native'
-import { MaterialCommunityIcons } from '@expo/vector-icons'
+import { Text, TouchableOpacity, View } from 'react-native'
+import { connect } from 'react-redux';
 
 import { ModalComp } from '../Atoms/Modal';
 import { ModalView } from './ModalView';
-import { SelectBox } from '../Atoms/CompUtils';
+import NetworkFailurePopup from '../Atoms/networkFailurePopup';
+import Search from './Search';
 
 import { newStyle } from './newStyle';
-import { colors, fontFamily, fontSize, levels } from '../../commonStyle';
+import { levels } from '../../commonStyle';
 
-const SearchBuyer = props => (
-    <>
-        <View style={{paddingLeft:levels.l5,justifyContent:'center',borderColor:colors.textFaint,borderWidth:1,marginBottom:levels.l3}}>
-            <TextInput style={[newStyle.input,{borderColor:colors.secondary}]} placeholder={`Search ${props.type}`} />
-            <MaterialCommunityIcons name="magnify" size={22} color={colors.textLight} style={{position:'absolute',left:levels.l2}} />
-        </View>
-        <View>
-            <View style={[newStyle.input,{flexDirection:'row',justifyContent:'space-between'}]}>
-                <Text style={{fontFamily:fontFamily.primaryRegular}}>Requirements</Text>
-                <SelectBox 
-                acceptedTerms={true}/>
-            </View>
-        </View>
-        {/* for new quotation screen */}
-        {!props.newQuotation ?
-        <TouchableOpacity 
-            onPress={props.convertToAddNewUserModal}
-            style={newStyle.add}
-        > 
-            <MaterialCommunityIcons name="plus" color={colors.primary} size={24} />
-            <Text style={newStyle.addTxt}>Add New {props.type}</Text> 
-        </TouchableOpacity>
-        : null }
-        <TouchableOpacity style={[newStyle.primaryBtn,{marginTop:'auto',alignSelf:'center'}]}>
-            <Text style={{color:colors.secondary,fontFamily:fontFamily.primaryBold,fontSize:fontSize.h1}}>{props.newQuotation ? 'Submit Quotaion' : 'Add ' + props.type}</Text>
-        </TouchableOpacity>
-    </>
-)
 
 const UserAddOptions = props => {
     const addManually = () => {
@@ -57,7 +30,7 @@ const UserAddOptions = props => {
 }
 
 
-export default class AddUserModal extends Component {
+class AddUserModal extends Component {
     constructor(props){
         super(props);
         this.state = {
@@ -105,10 +78,11 @@ export default class AddUserModal extends Component {
                     })}
                 >
                     {this.props.newQuotation || (!this.state.addNewUserModalVisible && !this.props.noSearch) ? 
-                        <SearchBuyer 
+                        <Search
                             convertToAddNewUserModal={this.convertToAddNewUserModal}
                             type={this.props.type}
                             newQuotation={this.props.newQuotation}
+                            actionAfterSearchAndSelect={this.props.actionAfterSearchAndSelect}
                         />
                     :
                         <UserAddOptions 
@@ -121,8 +95,19 @@ export default class AddUserModal extends Component {
                             })}
                         />
                     }
+                {this.props.networkFailure ?
+                    <NetworkFailurePopup />
+                : null}
                 </ModalView>
             </ModalComp>
         )
     }
 }
+
+const mapStateToProps = state => {
+    return {
+        networkFailure : state.networkFailure.networkFailureState
+    }
+}
+
+export default connect(mapStateToProps)(AddUserModal)
