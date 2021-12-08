@@ -35,5 +35,10 @@ export const newStyle = StyleSheet.create({
         padding:levels.l4,
         alignItems:'center',
         backgroundColor:colors.primary
+    },
+    disabledBtn : {
+        padding:levels.l4,
+        alignItems:'center',
+        backgroundColor:colors.primaryLight
     }
 })
