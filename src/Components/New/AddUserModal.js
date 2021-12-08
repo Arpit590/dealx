@@ -17,7 +17,7 @@ const SearchBuyer = props => (
         </View>
         <View>
             <View style={[newStyle.input,{flexDirection:'row',justifyContent:'space-between'}]}>
-                <Text>Requirements</Text>
+                <Text style={{fontFamily:fontFamily.primaryRegular}}>Requirements</Text>
                 <SelectBox 
                 acceptedTerms={true}/>
             </View>
