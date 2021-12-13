@@ -64,7 +64,7 @@ export default class NewDeal extends Component {
                                     <Text style={[newStyle.text,{marginRight:levels.l6}]}>Buyer</Text>
                                     <View>
                                         <Text style={[newStyle.text,{fontSize:fontSize.h1}]}>{this.state.buyers[item]['buyername']}</Text>
-                                        <Text style={{fontFamily:fontFamily.primary,fontSize:fontSize.h3}}>Location</Text>
+                                        <Text style={{fontFamily:fontFamily.primary,fontSize:fontSize.h3}}>{this.state.buyers[item]['addressline1']+' '+this.state.buyers[item]['addressline2']+' '+ this.state.buyers[item]['city']+' '+this.state.buyers[item]['country']}</Text>
                                     </View>
                                 </View>
                             )
