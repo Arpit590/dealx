@@ -3,9 +3,12 @@ import { SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity
 
 import AddUserModal from '../AddUserModal';
 import { AddBtn, PrimaryBtn } from '../../Atoms/CompUtils';
+import DatePicker from '../../Atoms/DatePicker';
 
 import { colors, fontFamily, fontSize, levels } from '../../../commonStyle';
 import { newStyle } from '../newStyle';
+
+import ArrowDown from '../../../../assets/icons/icons8-arrow-down.svg'
 
 export const ActionBtn = props => {
     return(
@@ -32,10 +35,11 @@ export default class NewDeal extends Component {
                 'Deal Closure Date',
             ],
             modalVisible : false,
-            buyers : {}
+            buyers : {},
+            showDatePicker : true
         }
 
-        this.addBuyers = this.addBuyers.bind(this);
+        this.addBuyers        = this.addBuyers.bind(this);
     }
 
     addBuyers(buyers){
@@ -81,7 +85,31 @@ export default class NewDeal extends Component {
                         return (
                             <View style={{marginTop:levels.l2,marginBottom:levels.l2}} key={item}>
                                 <Text style={newStyle.text}>{item}</Text>
-                                <TextInput style={newStyle.input} />
+                                <View style={{justifyContent:'center'}}>
+                                    <TextInput style={newStyle.input} />
+                                    {item==='Deal Closing Date' || item==='Deal Closure Date' ?  
+                                        <TouchableOpacity
+                                        onPress={() => this.setState(prevState => {
+                                            return{
+                                                ...prevState,
+                                                showDatePicker : !prevState.showDatePicker
+                                            }
+                                        })} 
+                                        style={styles.datePicker}>
+                                            <DatePicker closePicker={() => this.setState(prevState => {
+                                            return{
+                                                ...prevState,
+                                                showDatePicker : !prevState.showDatePicker
+                                            }
+                                        })}/> 
+                                        </TouchableOpacity>
+                                    : null }
+                                    {item==='RFQ Type' || item==='Delivery Terms' || item==='Payment Terms' ?  
+                                        <TouchableOpacity style={{position:'absolute',right:levels.l4}}>
+                                            <ArrowDown/>
+                                        </TouchableOpacity>
+                                    : null }
+                                </View>
                             </View>
                         )
                     })}
@@ -132,5 +160,11 @@ const styles = StyleSheet.create({
         borderWidth:1,
         marginRight:levels.l2,
         backgroundColor:colors.secondary
+    },
+    datePicker : {
+        position:'absolute',
+        right:levels.l4,
+        left:0,
+        alignItems:'flex-end'
     }
 })
