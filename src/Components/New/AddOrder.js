@@ -4,6 +4,7 @@ import { SafeAreaView, ScrollView, Text, TextInput, View } from 'react-native'
 import { AddBtn, PrimaryBtn } from '../Atoms/CompUtils';
 import { newStyle } from './newStyle';
 import { levels } from '../../commonStyle';
+import {DealSummary} from '../Atoms/DealSummary';
 
 export default class AddOrder extends Component {
     constructor(props){
@@ -21,6 +22,7 @@ export default class AddOrder extends Component {
         return(
             <ScrollView style={{padding:levels.l5}}>
                 <SafeAreaView>
+                    <DealSummary/>
                     {this.state.inputItems.map((item,index) => {
                         return(
                             <View style={{marginTop:levels.l2,marginBottom:levels.l2}} key={item}>
