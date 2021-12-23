@@ -20,9 +20,30 @@ export default class New extends Component {
             buyingView : true,
             modalVisible : false,
             type : 'Seller',
-            newQuotation: false
+            newQuotation: false,
+            iconSize : 28,
+            deals : {}
         }
-        this.iconSize = 28
+        this.addDeals = this.addDeals.bind(this);
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        //navigate to Add Order{Invoice} when deals added through New Quotation
+        prevState.deals !== this.state.deals && prevState.modalVisible !== this.state.modalVisible ? this.props.navigation.navigate('Add Order',{type:'Invoice',deals : this.state.deals}) : null
+    }
+    
+
+    addDeals(deals){
+        this.setState(prevState => {
+            return{
+                ...prevState,
+                modalVisible : !prevState.modalVisible,
+                deals : {
+                    ...prevState.deals,
+                    ...deals,
+                }
+            }
+        })
     }
 
     render() {
@@ -53,7 +74,7 @@ export default class New extends Component {
                                     newQuotation : true,
                                 }
                             })}>
-                                <Quotation height={this.iconSize} />
+                                <Quotation height={this.state.iconSize} />
                                 <Text style={styles.text}>
                                     New Quotation
                                 </Text>
@@ -66,7 +87,7 @@ export default class New extends Component {
                                     newQuotation : false,
                                 }
                             })}>
-                                <ReferBuyer height={this.iconSize} />
+                                <ReferBuyer height={this.state.iconSize} />
                                 <Text style={styles.text}>
                                     Refer Sellers
                                 </Text>
@@ -75,7 +96,7 @@ export default class New extends Component {
                             style={styles.options}
                             onPress={() => this.props.navigation.navigate('Add Order',{type:'Invoice'})}
                             >
-                                <AddPurchase height={this.iconSize} />
+                                <AddPurchase height={this.state.iconSize} />
                                 <Text style={styles.text}>
                                     Submit Invoices
                                 </Text>
@@ -84,7 +105,7 @@ export default class New extends Component {
                     :
                         <>
                             <TouchableOpacity style={styles.options} onPress={() => this.props.navigation.navigate('New Deal')}>
-                                <ReferNewDeal height={this.iconSize}/>
+                                <ReferNewDeal height={this.state.iconSize}/>
                                 <Text style={styles.text}>
                                     Refer New Deal
                                 </Text>
@@ -99,7 +120,7 @@ export default class New extends Component {
                                     newQuotation : false,
                                 }
                             })}>
-                                <ReferBuyer height={this.iconSize} />
+                                <ReferBuyer height={this.state.iconSize} />
                                 <Text style={styles.text}>
                                     Refer New Buyer
                                 </Text>
@@ -108,7 +129,7 @@ export default class New extends Component {
                             style={styles.options} 
                             onPress={() => this.props.navigation.navigate('Add Order',{type:'Purchase Order'})}
                             >
-                                <AddPurchase height={this.iconSize} />
+                                <AddPurchase height={this.state.iconSize} />
                                 <Text style={styles.text}>
                                     Submit Purchase Order
                                 </Text>
@@ -122,6 +143,8 @@ export default class New extends Component {
                 type={this.state.type} 
                 noSearch={true}
                 newQuotation={this.state.newQuotation ? 'Choose Deals' : false}
+                actionAfterSearchAndSelect={(deals) => this.addDeals(deals)}
+                type="Deal" 
                 />
                 <Navigation routeName={this.props.route.name} />
             </Index>

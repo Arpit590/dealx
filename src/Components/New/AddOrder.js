@@ -54,7 +54,12 @@ export default class AddOrder extends Component {
         return(
             <ScrollView style={{padding:levels.l5}}>
                 <SafeAreaView>
-                    <DealSummary/>
+                    {/* show deal summary if deal is selected */}
+                    {this.props.route.params.deals && Object.keys(this.props.route.params.deals).length ?
+                        Object.keys(this.props.route.params.deals).map((key,index) => (
+                            <DealSummary deal={this.props.route.params.deals[key]}/>
+                        ))
+                    : null }
                     {this.state.inputItems.map((item,index) => {
                         return(
                             <View style={{marginTop:levels.l2,marginBottom:levels.l2}} key={item}>

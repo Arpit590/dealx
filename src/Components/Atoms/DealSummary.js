@@ -5,11 +5,11 @@ import styled from 'styled-components'
 import Arrow from '../../../assets/icons/arrow-right.svg'
 import { colors, fontFamily, levels } from '../../commonStyle'
 
-export const DealSummary = () => {
+export const DealSummary = (props) => {
     return (
         <View style={styles.container}>
             <View style={styles.sec1}>
-                <Text style={styles.date}>Date</Text>
+                <Text style={styles.date}>{props.deal['createddate']}</Text>
                 <View style={{flexDirection:'row'}}>
                     <View style={styles.type}>
                         <Text style={{color:colors.primary}}>Active</Text>
@@ -20,10 +20,10 @@ export const DealSummary = () => {
                 </View>
             </View>
             <BoldText>
-            Supply of Boiler for Coal Fired Power Plant in Indonesia for paper plant project
+                {props.deal['dealname']}
             </BoldText>
             <View style={{flexDirection:'row',justifyContent:'space-between'}}>
-                <Text style={styles.date}>GH34GH343G4H3</Text>
+                <Text style={styles.date}>{props.deal['dealid']}</Text>
                 <TouchableOpacity style={{flexDirection:'row',alignItems:'center'}}>
                     <Text style={styles.action}>View Deal</Text>
                     <Arrow/>
