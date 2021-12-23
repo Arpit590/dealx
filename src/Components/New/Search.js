@@ -10,9 +10,9 @@ import { newStyle } from './newStyle';
 import { colors, fontFamily, fontSize, levels } from '../../commonStyle';
 
 const Search = props => {
-    const [buyers, setBuyers] = useState([]);
-    const [buyerApiCalled, setBuyerApiCalled] = useState(false)
-    const [selectedBuyers, setSelectedBuyers] = useState({})
+    const [results, setResults]               = useState([]);
+    const [apiCalled, setApiCalled]           = useState(false)
+    const [selected, setSelected]             = useState({})
     const [searching, setSearching]           = useState(false)
     
     let cancelToken = useRef()
@@ -59,32 +59,32 @@ const Search = props => {
             }, 2000)
         }
         else{
-            setBuyers(prev => prev.concat(fetchedBuyers))
+            setResults(prev => prev.concat(fetchedBuyers))
         }
         setSearching(prev => !prev)
-        setBuyerApiCalled(prev => !prev)
+        setApiCalled(prev => !prev)
     }
 
-    //selected buyer obj
-    // { buyerId : 
+    //selected obj
+    // { id : 
     //       {
-    //          buyerId : buyerId
-    //          buyerName : name       
-    //           ...buyer details
+    //          id : id
+    //          name : name       
+    //           ...details
     //       }
     // }
-    const selectBuyer = (buyerId,buyer) => {
-        //buyer selection toggling
-        setSelectedBuyers(prev => { 
-            if(prev && prev[buyerId]){
-                const key = buyerId
-                const { [key]: value, ...withoutBuyerId } = prev;
-                return withoutBuyerId;
+    const selectResults = (id,result) => {
+        //result selection toggling
+        setSelected(prev => { 
+            if(prev && prev[id]){
+                const key = id
+                const { [key]: value, ...withoutId } = prev;
+                return withoutId;
             }
             else{
                 return {
                     ...prev,
-                    [buyerId] : buyer
+                    [id] : result
                 }
             }
         })
@@ -94,7 +94,7 @@ const Search = props => {
         <>
             <View style={{paddingLeft:levels.l5,justifyContent:'center',borderColor:colors.textFaint,borderWidth:1,marginBottom:levels.l3}}>
                 <TouchableOpacity 
-                onPress={!buyerApiCalled ? startSearch : null}
+                onPress={!apiCalled ? startSearch : null}
                 style={[newStyle.input,{borderColor:colors.secondary}]}
                 >
                     <Text style={{fontFamily:fontFamily.primary,color:colors.textLight}}>{`Search ${props.type}`}</Text>
@@ -102,9 +102,9 @@ const Search = props => {
                 <MaterialCommunityIcons name="magnify" size={22} color={colors.textLight} style={{position:'absolute',left:levels.l2}} />
             </View>
             <View>
-                {buyerApiCalled > 0 ?
-                    buyers.length > 0 ?
-                        buyers.map((item,index) => {
+                {apiCalled > 0 ?
+                    results.length > 0 ?
+                        results.map((item,index) => {
                             return(
                             <TouchableOpacity 
                             style={[
@@ -114,14 +114,14 @@ const Search = props => {
                                     marginBottom:levels.l2
                                 }
                             ]}
-                            key={item.buyerid}
+                            key={item[props.type.toLowerCase()+'id']}
                             activeOpacity={1}
-                            onPress={() => selectBuyer(item.buyerid,item)}
+                            onPress={() => selectResults(item[props.type.toLowerCase()+'id'],item)}
                             >
-                                <Text style={{fontFamily:fontFamily.primaryRegular}}>{item.buyername}</Text>
+                                <Text style={{fontFamily:fontFamily.primaryRegular}}>{item[props.type.toLowerCase()+'name']}</Text>
                                 <SelectBox 
-                                acceptedTerms={selectedBuyers.hasOwnProperty(item.buyerid) ? true : false}
-                                onPress={() => selectBuyer(item.buyerid,item)}/>
+                                acceptedTerms={selected.hasOwnProperty(item[props.type.toLowerCase()+'id']) ? true : false}
+                                onPress={() => selectResults(item[props.type.toLowerCase()+'id'],item)}/>
                             </TouchableOpacity>
                             )
                         })
@@ -143,9 +143,9 @@ const Search = props => {
             </TouchableOpacity>
             : null }
             <TouchableOpacity 
-            onPress={Object.keys(selectedBuyers).length > 0 ? () => props.actionAfterSearchAndSelect(selectedBuyers) : null}
+            onPress={Object.keys(selected).length > 0 ? () => props.actionAfterSearchAndSelect(selected) : null}
             style={[
-                Object.keys(selectedBuyers).length > 0 ? newStyle.primaryBtn : newStyle.disabledBtn,
+                Object.keys(selected).length > 0 ? newStyle.primaryBtn : newStyle.disabledBtn,
                 {marginTop:'auto',alignSelf:'center'}
             ]}>
                 <Text style={{color:colors.secondary,fontFamily:fontFamily.primaryBold,fontSize:fontSize.h1}}>{props.newQuotation ? 'Submit Quotaion' : 'Add ' + props.type}</Text>
