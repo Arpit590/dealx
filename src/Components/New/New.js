@@ -22,25 +22,25 @@ export default class New extends Component {
             type : 'Seller',
             newQuotation: false,
             iconSize : 28,
-            deals : {}
+            deal : {}
         }
         this.addDeals = this.addDeals.bind(this);
     }
 
     componentDidUpdate(prevProps, prevState) {
-        //navigate to Add Order{Invoice} when deals added through New Quotation
-        prevState.deals !== this.state.deals && prevState.modalVisible !== this.state.modalVisible ? this.props.navigation.navigate('Add Order',{type:'Invoice',deals : this.state.deals}) : null
+        //navigate to Add Order{Invoice} when deal added through New Quotation
+        prevState.deal !== this.state.deal && prevState.modalVisible !== this.state.modalVisible ? this.props.navigation.navigate('New Quotation',{deal : this.state.deal}) : null
     }
     
 
-    addDeals(deals){
+    addDeals(deal){
         this.setState(prevState => {
             return{
                 ...prevState,
                 modalVisible : !prevState.modalVisible,
-                deals : {
-                    ...prevState.deals,
-                    ...deals,
+                deal : {
+                    ...prevState.deal,
+                    ...deal,
                 }
             }
         })
@@ -138,13 +138,13 @@ export default class New extends Component {
                     }
                 </View>
                 <SearchModal 
-                navigation={this.props.navigation} 
-                modalVisible={this.state.modalVisible} 
-                type={this.state.type} 
-                noSearch={true}
-                newQuotation={this.state.newQuotation ? 'Choose Deals' : false}
-                actionAfterSearchAndSelect={(deals) => this.addDeals(deals)}
-                type="Deal" 
+                    navigation={this.props.navigation} 
+                    modalVisible={this.state.modalVisible} 
+                    type={this.state.type} 
+                    noSearch={true}
+                    newQuotation={this.state.newQuotation ? 'Choose Deals' : false}
+                    actionAfterSearchAndSelect={(deal) => this.addDeals(deal)}
+                    type="Deal" 
                 />
                 <Navigation routeName={this.props.route.name} />
             </Index>

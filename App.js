@@ -19,6 +19,7 @@ import NewDeal from './src/Components/New/Selling/NewDeal';
 import AddNewUser from './src/Components/New/AddNewUser';
 import LineItems from './src/Components/New/Selling/LineItems';
 import AddOrder from './src/Components/New/AddOrder';
+import Quotation from './src/Components/New/Buying/Quotation';
 
 const Stack = createNativeStackNavigator();
 
@@ -61,6 +62,14 @@ export default function App() {
             options={{
               title : '',
               headerBackTitle:'Refer Deal',
+            }}
+          />
+          <Stack.Screen
+            name="New Quotation"
+            component={Quotation}
+            options={{
+              title : '',
+              headerBackTitle:'New Quotation',
             }}
           />
           <Stack.Screen
