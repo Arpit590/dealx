@@ -30,7 +30,7 @@ const UserAddOptions = props => {
 }
 
 
-class AddUserModal extends Component {
+class SearchModal extends Component {
     constructor(props){
         super(props);
         this.state = {
@@ -110,4 +110,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps)(AddUserModal)
+export default connect(mapStateToProps)(SearchModal)

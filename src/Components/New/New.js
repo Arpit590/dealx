@@ -3,7 +3,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 
 import Index from '../Index'
 import Navigation from '../Navigation/Navigation'
-import AddUserModal from './AddUserModal'
+import SearchModal from './SearchModal'
 import ReferBuyer from '../../../assets/icons/icons8-ReferBuyer.svg'
 import ReferNewDeal from '../../../assets/icons/icons8-refer-new-deal.svg'
 import AddPurchase from '../../../assets/icons/icons8-add-purchase order.svg'
@@ -116,7 +116,7 @@ export default class New extends Component {
                         </>
                     }
                 </View>
-                <AddUserModal 
+                <SearchModal 
                 navigation={this.props.navigation} 
                 modalVisible={this.state.modalVisible} 
                 type={this.state.type} 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 
-import AddUserModal from '../AddUserModal';
+import SearchModal from '../SearchModal';
 import { AddBtn, PrimaryBtn } from '../../Atoms/CompUtils';
 import DatePicker from '../../Atoms/DatePicker';
 
@@ -135,7 +135,7 @@ export default class NewDeal extends Component {
                         </TouchableOpacity>
                     </View>
                     <ActionBtn action="Submit Deal" />
-                    <AddUserModal 
+                    <SearchModal 
                     navigation={this.props.navigation} 
                     modalVisible={this.state.modalVisible} type="Buyer" 
                     actionAfterSearchAndSelect={(buyers) => this.addBuyers(buyers)}

@@ -4,7 +4,7 @@ import { SafeAreaView, ScrollView, Text, TextInput, View } from 'react-native'
 import { AddBtn, PrimaryBtn } from '../Atoms/CompUtils';
 import { newStyle } from './newStyle';
 import {DealSummary} from '../Atoms/DealSummary';
-import AddUserModal from './AddUserModal'
+import SearchModal from './SearchModal'
 
 import { levels } from '../../commonStyle';
 
@@ -73,7 +73,7 @@ export default class AddOrder extends Component {
                         <AddBtn text={`Upload ${this.props.route.params.type}`} />
                         <PrimaryBtn text={`Submit ${this.props.route.params.type}`} />
                     </View>
-                    <AddUserModal
+                    <SearchModal
                         navigation={this.props.navigation} 
                         modalVisible={this.state.modalVisible} type="Seller" 
                         actionAfterSearchAndSelect={(sellers) => this.addSellers(sellers)}
