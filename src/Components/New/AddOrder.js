@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { SafeAreaView, ScrollView, Text, TextInput, View } from 'react-native'
+import { Keyboard, SafeAreaView, ScrollView, Text, TextInput, View } from 'react-native'
 
 import { AddBtn, PrimaryBtn } from '../Atoms/CompUtils';
 import { newStyle } from './newStyle';
@@ -19,33 +19,37 @@ export default class AddOrder extends Component {
                 `${props.route.params.type} Number`,
             ],
             sellers : {},
+            deals : {},
             modalVisible : false,
+            type : 'Deal'
         }
-        this.ref = React.createRef()
-        this.addSellers = this.addSellers.bind(this);
+
+        this.addItems         = this.addItems.bind(this);
         this.callModalOnFocus = this.callModalOnFocus.bind(this);
     }
 
-    addSellers(sellers){
+    //type=deals||sellers
+    addItems(type,items){
         this.setState(prevState => {
             return{
                 ...prevState,
                 modalVisible : !prevState.modalVisible,
-                sellers : {
-                    ...prevState.sellers,
-                    ...sellers,
+                [type] : {
+                    ...prevState[type],
+                    ...items,
                 }
             }
         })
     }
 
-    callModalOnFocus(){
-        //unfocus text input for search sellers to avoid calling search sellers modal recursively
-        this.ref.current.focus()
+    callModalOnFocus(index){
+        //Keyboard.dismiss() to avoid calling search deals/sellers modal recursively
+        Keyboard.dismiss()
         this.setState(prevState => {
             return{
                 ...prevState,
                 modalVisible : !prevState.modalVisible,
+                type         : index===0 ? 'Deal' : 'Seller'
             }
         })
     }
@@ -55,9 +59,9 @@ export default class AddOrder extends Component {
             <ScrollView style={{padding:levels.l5}}>
                 <SafeAreaView>
                     {/* show deal summary if deal is selected */}
-                    {this.props.route.params.deals && Object.keys(this.props.route.params.deals).length ?
-                        Object.keys(this.props.route.params.deals).map((key,index) => (
-                            <DealSummary deal={this.props.route.params.deals[key]}/>
+                    {Object.keys(this.state.deals).length > 0 ?
+                        Object.keys(this.state.deals).map((key,index) => (
+                            <DealSummary deal={this.state.deals[key]}/>
                         ))
                     : null }
                     {this.state.inputItems.map((item,index) => {
@@ -66,10 +70,9 @@ export default class AddOrder extends Component {
                                 <Text style={newStyle.text}>{item}</Text>
                                 <TextInput
                                 //ref to focus after search sellers is complete
-                                ref={index===2 && this.props.route.params.type === 'Purchase Order' ? this.ref:null }
                                 placeholder={index ===0 ? 'Search Deals' : index === 1 ? (this.props.route.params.type === 'Purchase Order' ?'Search Sellers' : 'Seller Description') : index === 2 ? '$' : ''}
                                 //modal visible on focus for only add Purchsae Order screen
-                                onFocus={index===1 && this.props.route.params.type === 'Purchase Order' ? this.callModalOnFocus : null} 
+                                onFocus={() => index===0 || (index===1 && this.props.route.params.type === 'Purchase Order') ? this.callModalOnFocus(index) : null}
                                 style={newStyle.input} />
                             </View>
                         )
@@ -79,9 +82,12 @@ export default class AddOrder extends Component {
                         <PrimaryBtn text={`Submit ${this.props.route.params.type}`} />
                     </View>
                     <SearchModal
-                        navigation={this.props.navigation} 
-                        modalVisible={this.state.modalVisible} type="Seller" 
-                        actionAfterSearchAndSelect={(sellers) => this.addSellers(sellers)}
+                        navigation                 = {this.props.navigation} 
+                        modalVisible               = {this.state.modalVisible} 
+                        type                       = {this.state.type} 
+                        actionAfterSearchAndSelect = {(items) => this.addItems(this.state.type==='Deal' ? 'deals' : 'sellers',items)}
+                        noSearch                   = {this.state.type==='Deal' ? true : false}
+                        newQuotation               = {this.state.type==='Deal' ? 'Choose Deals' : false}
                     />
                 </SafeAreaView>
             </ScrollView>
