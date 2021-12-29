@@ -9,17 +9,19 @@ import reducers from './src/Store/Reducers/index'
 import SplashScreens from './src/Components/StartScreen/SplashScreens';
 import Register from './src/Components/StartScreen/Register';
 import New from './src/Components/New/New';
-import TransactionBuyingScreen from './src/Components/TransactionScreens/TransactionBuyingScreen/TransactionBuyingScreen';
-import TransactionSellingScreen from './src/Components/TransactionScreens/TransactionSellingScreen.js/TransactionSellingScreen';
-import MyEarningsScreen from './src/Components/TransactionScreens/MyEarningsScreen/MyEarningsScreen';
-import ElectricSpares from './src/Components/TransactionScreens/ElectricSparesScreen.js/ElectricSpares';
-import ClaimForm from './src/Components/TransactionScreens/ClaimForm';
-import TransactionHeader from './src/Components/TransactionScreens/TransactionHeader';
 import NewDeal from './src/Components/New/Selling/NewDeal';
+import TransactionScreen from "./src/Components/TransactionScreens/TransactionScreen";
+import MyEarningsScreen from "./src/Components/TransactionScreens/MyEarningsScreen/MyEarningsScreen";
+import DealsScreen from "./src/Components/TransactionScreens/DealsScreen/DealsScreen";
+import DetailForm from "./src/Components/TransactionScreens/DetailForm";
+import ClaimForm from "./src/Components/TransactionScreens/ClaimForm";
+import MyNetworkScreen from "./src/Components/MyNetworkScreens/MyNetworkScreen";
 import AddNewUser from './src/Components/New/AddNewUser';
 import LineItems from './src/Components/New/Selling/LineItems';
 import AddOrder from './src/Components/New/AddOrder';
 import Quotation from './src/Components/New/Buying/Quotation';
+import Header from './src/Components/Atoms/Header';
+import AboutScreen from './src/Components/MyNetworkScreens/AboutScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -27,7 +29,9 @@ export default function App() {
   return (
     <Provider store={createStore(reducers)}>
       <NavigationContainer>
-        <Stack.Navigator>
+        <Stack.Navigator
+        initialRouteName='My Network'
+        >
           <Stack.Screen 
             name="Splash" 
             component={SplashScreens} 
@@ -49,7 +53,7 @@ export default function App() {
               header:() => {
                 return (
                   <SafeAreaView>
-                    <TransactionHeader headingText="What would you like to do?" />
+                    <Header headingText="What would you like to do?" />
                   </SafeAreaView>
                 )
               }
@@ -97,15 +101,8 @@ export default function App() {
             }}
           />
           <Stack.Screen
-          name="TransactionBuying"
-          component={TransactionBuyingScreen}
-          options={{
-            headerShown:false
-          }}
-          />
-          <Stack.Screen
-          name="TransactionSelling"
-          component={TransactionSellingScreen}
+          name="Transaction"
+          component={TransactionScreen}
           options={{
             headerShown:false
           }}
@@ -118,15 +115,36 @@ export default function App() {
           }}
           />
           <Stack.Screen
-          name="Electric"
-          component={ElectricSpares}
+          name="Deals"
+          component={DealsScreen}
           options={{
             headerShown:false
           }}
           />
           <Stack.Screen
-          name="ClaimForm"
+          name="Detail Form"
+          component={DetailForm}
+          options={{
+            headerShown:false
+          }}
+          />
+          <Stack.Screen
+          name="Claim Form"
           component={ClaimForm}
+          options={{
+            headerShown:false
+          }}
+          />
+          <Stack.Screen
+          name="My Network"
+          component={MyNetworkScreen}
+          options={{
+            headerShown:false
+          }}
+          />
+          <Stack.Screen
+          name="About"
+          component={AboutScreen}
           options={{
             headerShown:false
           }}
