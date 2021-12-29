@@ -30,7 +30,7 @@ export default function App() {
     <Provider store={createStore(reducers)}>
       <NavigationContainer>
         <Stack.Navigator
-        initialRouteName='My Network'
+        initialRouteName='Splash'
         >
           <Stack.Screen 
             name="Splash" 
